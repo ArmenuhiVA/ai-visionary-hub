@@ -1,5 +1,4 @@
 import i18n from "i18next";
-import LanguageDetector from "i18next-browser-languagedetector";
 import { initReactI18next } from "react-i18next";
 import en from "./en.json";
 import hy from "./hy.json";
@@ -9,24 +8,30 @@ export const SUPPORTED_LANGS = ["hy", "ru", "en"] as const;
 export type Lang = (typeof SUPPORTED_LANGS)[number];
 
 if (!i18n.isInitialized) {
-  i18n
-    .use(LanguageDetector)
-    .use(initReactI18next)
-    .init({
-      resources: {
-        en: { translation: en },
-        hy: { translation: hy },
-        ru: { translation: ru },
-      },
-      fallbackLng: "en",
-      supportedLngs: SUPPORTED_LANGS,
-      detection: {
-        order: ["localStorage", "navigator"],
-        lookupLocalStorage: "preferred_language",
-        caches: ["localStorage"],
-      },
-      interpolation: { escapeValue: false },
+  i18n.use(initReactI18next).init({
+    resources: {
+      en: { translation: en },
+      hy: { translation: hy },
+      ru: { translation: ru },
+    },
+    lng: "en",
+    fallbackLng: "en",
+    supportedLngs: SUPPORTED_LANGS,
+    interpolation: { escapeValue: false },
+    react: { useSuspense: false },
+  });
+
+  // After mount, restore preferred language without causing SSR mismatch
+  if (typeof window !== "undefined") {
+    const stored = window.localStorage.getItem("preferred_language");
+    if (stored && (SUPPORTED_LANGS as readonly string[]).includes(stored) && stored !== "en") {
+      // defer so hydration completes with the SSR language first
+      setTimeout(() => i18n.changeLanguage(stored), 0);
+    }
+    i18n.on("languageChanged", (lng) => {
+      try { window.localStorage.setItem("preferred_language", lng); } catch {}
     });
+  }
 }
 
 export default i18n;
