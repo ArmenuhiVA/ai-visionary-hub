@@ -29,8 +29,8 @@ function Videos() {
   const { lang } = useLanguage();
   const [cat, setCat] = useState<string>("all");
 
-  const categories = useMemo(() => {
-    const set = new Set(videos.map((v) => v.category).filter(Boolean));
+  const categories = useMemo<string[]>(() => {
+    const set = new Set(videos.map((v) => v.category).filter((c): c is string => !!c));
     return ["all", ...Array.from(set)];
   }, [videos]);
 
@@ -50,7 +50,7 @@ function Videos() {
           {categories.map((c) => (
             <button
               key={c}
-              onClick={() => setCat(c)}
+              onClick={() => setCat(c as string)}
               className={`rounded-full border px-4 py-1.5 text-xs capitalize transition ${
                 cat === c ? "border-primary bg-primary text-primary-foreground" : "border-border hover:border-accent"
               }`}
