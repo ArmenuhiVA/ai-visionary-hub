@@ -82,9 +82,11 @@ function RootShell({ children }: { children: ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
   return (
     <QueryClientProvider client={queryClient}>
-      <Outlet />
+      {mounted ? <Outlet /> : null}
       <Toaster theme="dark" position="bottom-right" />
     </QueryClientProvider>
   );
