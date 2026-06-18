@@ -76,10 +76,14 @@ function VideosManager() {
   const save = useMutation({
     mutationFn: async (v: Video) => {
       const { id, ...rest } = v;
-      rest.youtube_id = extractYouTubeId(rest.youtube_url);
+      const payload = {
+        ...rest,
+        youtube_url: rest.youtube_url ?? "",
+        youtube_id: extractYouTubeId(rest.youtube_url),
+      };
       const { error } = id
-        ? await supabase.from("videos").update(rest).eq("id", id)
-        : await supabase.from("videos").insert(rest);
+        ? await supabase.from("videos").update(payload).eq("id", id)
+        : await supabase.from("videos").insert(payload);
       if (error) throw error;
     },
     onSuccess: () => {
