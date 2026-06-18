@@ -1,29 +1,41 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { SiteHeader } from "@/components/layout/SiteHeader";
+import { SiteFooter } from "@/components/layout/SiteFooter";
+import { NeuralHero } from "@/components/home/NeuralHero";
+import { StatsStrip } from "@/components/home/StatsStrip";
+import { FeaturedCourses } from "@/components/home/FeaturedCourses";
+import { PartnersMarquee } from "@/components/home/PartnersMarquee";
+import { TestimonialsCarousel } from "@/components/home/TestimonialsCarousel";
+import { ContactSection } from "@/components/home/ContactSection";
+import { AIChatWidget } from "@/components/shared/AIChatWidget";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Your App" },
-      { name: "description", content: "Replace this with a one-sentence description of your app." },
-      { property: "og:title", content: "Your App" },
-      { property: "og:description", content: "Replace this with a one-sentence description of your app." },
+      { title: "Dr. Varazdat Avetisyan — AI Educator, CTO & International Speaker" },
+      { name: "description", content: "Empowering the next generation of AI professionals. Courses, talks, and research from Yerevan, Armenia." },
+      { property: "og:title", content: "Dr. Varazdat Avetisyan — AI Educator" },
+      { property: "og:description", content: "PhD in Computer Engineering. 5,000+ students trained. 100+ workshops." },
     ],
   }),
-  component: Index,
+  ssr: false,
+  component: Home,
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
-function Index() {
+function Home() {
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
+    <div className="min-h-screen">
+      <SiteHeader />
+      <main>
+        <NeuralHero />
+        <StatsStrip />
+        <FeaturedCourses />
+        <PartnersMarquee />
+        <TestimonialsCarousel />
+        <ContactSection />
+      </main>
+      <SiteFooter />
+      <AIChatWidget />
     </div>
   );
 }
