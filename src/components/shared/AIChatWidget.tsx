@@ -23,6 +23,8 @@ export function AIChatWidget() {
     await sendMessage({ text });
   };
 
+  if (!mounted) return null;
+
   return (
     <>
       <button
