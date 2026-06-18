@@ -2,7 +2,7 @@ import { createFileRoute, Link, Outlet, useNavigate, useRouterState } from "@tan
 import { useAuth } from "@/hooks/use-auth";
 import { useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
-import { LayoutDashboard, User, BookOpen, Mic, MessageSquare, LogOut, ExternalLink, Brain } from "lucide-react";
+import { LayoutDashboard, User, BookOpen, Mic, MessageSquare, LogOut, ExternalLink, Brain, Video } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/admin")({
@@ -14,6 +14,7 @@ const NAV = [
   { to: "/admin", label: "Dashboard", icon: LayoutDashboard, exact: true },
   { to: "/admin/profile", label: "Profile", icon: User },
   { to: "/admin/courses", label: "Courses", icon: BookOpen },
+  { to: "/admin/videos", label: "Videos", icon: Video },
   { to: "/admin/talks", label: "Talks", icon: Mic },
   { to: "/admin/messages", label: "Messages", icon: MessageSquare },
 ];

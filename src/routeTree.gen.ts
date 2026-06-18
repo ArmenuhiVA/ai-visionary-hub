@@ -21,6 +21,7 @@ import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AdminIndexRouteImport } from './routes/admin.index'
 import { Route as ApiChatRouteImport } from './routes/api/chat'
+import { Route as AdminVideosRouteImport } from './routes/admin.videos'
 import { Route as AdminTalksRouteImport } from './routes/admin.talks'
 import { Route as AdminProfileRouteImport } from './routes/admin.profile'
 import { Route as AdminMessagesRouteImport } from './routes/admin.messages'
@@ -86,6 +87,11 @@ const ApiChatRoute = ApiChatRouteImport.update({
   path: '/api/chat',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminVideosRoute = AdminVideosRouteImport.update({
+  id: '/videos',
+  path: '/videos',
+  getParentRoute: () => AdminRoute,
+} as any)
 const AdminTalksRoute = AdminTalksRouteImport.update({
   id: '/talks',
   path: '/talks',
@@ -122,6 +128,7 @@ export interface FileRoutesByFullPath {
   '/admin/messages': typeof AdminMessagesRoute
   '/admin/profile': typeof AdminProfileRoute
   '/admin/talks': typeof AdminTalksRoute
+  '/admin/videos': typeof AdminVideosRoute
   '/api/chat': typeof ApiChatRoute
   '/admin/': typeof AdminIndexRoute
 }
@@ -139,6 +146,7 @@ export interface FileRoutesByTo {
   '/admin/messages': typeof AdminMessagesRoute
   '/admin/profile': typeof AdminProfileRoute
   '/admin/talks': typeof AdminTalksRoute
+  '/admin/videos': typeof AdminVideosRoute
   '/api/chat': typeof ApiChatRoute
   '/admin': typeof AdminIndexRoute
 }
@@ -158,6 +166,7 @@ export interface FileRoutesById {
   '/admin/messages': typeof AdminMessagesRoute
   '/admin/profile': typeof AdminProfileRoute
   '/admin/talks': typeof AdminTalksRoute
+  '/admin/videos': typeof AdminVideosRoute
   '/api/chat': typeof ApiChatRoute
   '/admin/': typeof AdminIndexRoute
 }
@@ -178,6 +187,7 @@ export interface FileRouteTypes {
     | '/admin/messages'
     | '/admin/profile'
     | '/admin/talks'
+    | '/admin/videos'
     | '/api/chat'
     | '/admin/'
   fileRoutesByTo: FileRoutesByTo
@@ -195,6 +205,7 @@ export interface FileRouteTypes {
     | '/admin/messages'
     | '/admin/profile'
     | '/admin/talks'
+    | '/admin/videos'
     | '/api/chat'
     | '/admin'
   id:
@@ -213,6 +224,7 @@ export interface FileRouteTypes {
     | '/admin/messages'
     | '/admin/profile'
     | '/admin/talks'
+    | '/admin/videos'
     | '/api/chat'
     | '/admin/'
   fileRoutesById: FileRoutesById
@@ -317,6 +329,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiChatRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/videos': {
+      id: '/admin/videos'
+      path: '/videos'
+      fullPath: '/admin/videos'
+      preLoaderRoute: typeof AdminVideosRouteImport
+      parentRoute: typeof AdminRoute
+    }
     '/admin/talks': {
       id: '/admin/talks'
       path: '/talks'
@@ -353,6 +372,7 @@ interface AdminRouteChildren {
   AdminMessagesRoute: typeof AdminMessagesRoute
   AdminProfileRoute: typeof AdminProfileRoute
   AdminTalksRoute: typeof AdminTalksRoute
+  AdminVideosRoute: typeof AdminVideosRoute
   AdminIndexRoute: typeof AdminIndexRoute
 }
 
@@ -361,6 +381,7 @@ const AdminRouteChildren: AdminRouteChildren = {
   AdminMessagesRoute: AdminMessagesRoute,
   AdminProfileRoute: AdminProfileRoute,
   AdminTalksRoute: AdminTalksRoute,
+  AdminVideosRoute: AdminVideosRoute,
   AdminIndexRoute: AdminIndexRoute,
 }
 
