@@ -21,8 +21,11 @@ export function SiteHeader() {
     { to: "/", label: t("nav.home") },
     { to: "/about", label: t("nav.about") },
     { to: "/courses", label: t("nav.courses") },
+    { to: "/videos", label: t("nav.videos") },
     { to: "/talks", label: t("nav.talks") },
     { to: "/blog", label: t("nav.blog") },
+    { to: "/companies", label: t("nav.companies") },
+    { to: "/contact", label: t("nav.contact") },
   ];
 
   return (

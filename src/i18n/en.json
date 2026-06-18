@@ -3,8 +3,11 @@
     "home": "Home",
     "about": "About",
     "courses": "Courses",
+    "videos": "Videos",
     "talks": "Talks",
     "blog": "Blog",
+    "companies": "Partners",
+    "contact": "Contact",
     "admin": "Admin"
   },
   "hero": {

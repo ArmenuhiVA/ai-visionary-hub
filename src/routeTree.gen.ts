@@ -9,8 +9,11 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as VideosRouteImport } from './routes/videos'
 import { Route as TalksRouteImport } from './routes/talks'
 import { Route as CoursesRouteImport } from './routes/courses'
+import { Route as ContactRouteImport } from './routes/contact'
+import { Route as CompaniesRouteImport } from './routes/companies'
 import { Route as BlogRouteImport } from './routes/blog'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AdminRouteImport } from './routes/admin'
@@ -23,6 +26,11 @@ import { Route as AdminProfileRouteImport } from './routes/admin.profile'
 import { Route as AdminMessagesRouteImport } from './routes/admin.messages'
 import { Route as AdminCoursesRouteImport } from './routes/admin.courses'
 
+const VideosRoute = VideosRouteImport.update({
+  id: '/videos',
+  path: '/videos',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const TalksRoute = TalksRouteImport.update({
   id: '/talks',
   path: '/talks',
@@ -31,6 +39,16 @@ const TalksRoute = TalksRouteImport.update({
 const CoursesRoute = CoursesRouteImport.update({
   id: '/courses',
   path: '/courses',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CompaniesRoute = CompaniesRouteImport.update({
+  id: '/companies',
+  path: '/companies',
   getParentRoute: () => rootRouteImport,
 } as any)
 const BlogRoute = BlogRouteImport.update({
@@ -95,8 +113,11 @@ export interface FileRoutesByFullPath {
   '/admin': typeof AdminRouteWithChildren
   '/auth': typeof AuthRoute
   '/blog': typeof BlogRoute
+  '/companies': typeof CompaniesRoute
+  '/contact': typeof ContactRoute
   '/courses': typeof CoursesRoute
   '/talks': typeof TalksRoute
+  '/videos': typeof VideosRoute
   '/admin/courses': typeof AdminCoursesRoute
   '/admin/messages': typeof AdminMessagesRoute
   '/admin/profile': typeof AdminProfileRoute
@@ -109,8 +130,11 @@ export interface FileRoutesByTo {
   '/about': typeof AboutRoute
   '/auth': typeof AuthRoute
   '/blog': typeof BlogRoute
+  '/companies': typeof CompaniesRoute
+  '/contact': typeof ContactRoute
   '/courses': typeof CoursesRoute
   '/talks': typeof TalksRoute
+  '/videos': typeof VideosRoute
   '/admin/courses': typeof AdminCoursesRoute
   '/admin/messages': typeof AdminMessagesRoute
   '/admin/profile': typeof AdminProfileRoute
@@ -125,8 +149,11 @@ export interface FileRoutesById {
   '/admin': typeof AdminRouteWithChildren
   '/auth': typeof AuthRoute
   '/blog': typeof BlogRoute
+  '/companies': typeof CompaniesRoute
+  '/contact': typeof ContactRoute
   '/courses': typeof CoursesRoute
   '/talks': typeof TalksRoute
+  '/videos': typeof VideosRoute
   '/admin/courses': typeof AdminCoursesRoute
   '/admin/messages': typeof AdminMessagesRoute
   '/admin/profile': typeof AdminProfileRoute
@@ -142,8 +169,11 @@ export interface FileRouteTypes {
     | '/admin'
     | '/auth'
     | '/blog'
+    | '/companies'
+    | '/contact'
     | '/courses'
     | '/talks'
+    | '/videos'
     | '/admin/courses'
     | '/admin/messages'
     | '/admin/profile'
@@ -156,8 +186,11 @@ export interface FileRouteTypes {
     | '/about'
     | '/auth'
     | '/blog'
+    | '/companies'
+    | '/contact'
     | '/courses'
     | '/talks'
+    | '/videos'
     | '/admin/courses'
     | '/admin/messages'
     | '/admin/profile'
@@ -171,8 +204,11 @@ export interface FileRouteTypes {
     | '/admin'
     | '/auth'
     | '/blog'
+    | '/companies'
+    | '/contact'
     | '/courses'
     | '/talks'
+    | '/videos'
     | '/admin/courses'
     | '/admin/messages'
     | '/admin/profile'
@@ -187,13 +223,23 @@ export interface RootRouteChildren {
   AdminRoute: typeof AdminRouteWithChildren
   AuthRoute: typeof AuthRoute
   BlogRoute: typeof BlogRoute
+  CompaniesRoute: typeof CompaniesRoute
+  ContactRoute: typeof ContactRoute
   CoursesRoute: typeof CoursesRoute
   TalksRoute: typeof TalksRoute
+  VideosRoute: typeof VideosRoute
   ApiChatRoute: typeof ApiChatRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/videos': {
+      id: '/videos'
+      path: '/videos'
+      fullPath: '/videos'
+      preLoaderRoute: typeof VideosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/talks': {
       id: '/talks'
       path: '/talks'
@@ -206,6 +252,20 @@ declare module '@tanstack/react-router' {
       path: '/courses'
       fullPath: '/courses'
       preLoaderRoute: typeof CoursesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/companies': {
+      id: '/companies'
+      path: '/companies'
+      fullPath: '/companies'
+      preLoaderRoute: typeof CompaniesRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/blog': {
@@ -312,8 +372,11 @@ const rootRouteChildren: RootRouteChildren = {
   AdminRoute: AdminRouteWithChildren,
   AuthRoute: AuthRoute,
   BlogRoute: BlogRoute,
+  CompaniesRoute: CompaniesRoute,
+  ContactRoute: ContactRoute,
   CoursesRoute: CoursesRoute,
   TalksRoute: TalksRoute,
+  VideosRoute: VideosRoute,
   ApiChatRoute: ApiChatRoute,
 }
 export const routeTree = rootRouteImport
