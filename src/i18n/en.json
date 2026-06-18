@@ -1,0 +1,61 @@
+{
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "courses": "Courses",
+    "talks": "Talks",
+    "blog": "Blog",
+    "admin": "Admin"
+  },
+  "hero": {
+    "cta_courses": "Explore Courses",
+    "cta_cv": "Download CV",
+    "scroll": "Scroll to explore",
+    "roles": ["AI Educator", "Data Scientist", "University Professor", "International Speaker", "CTO"]
+  },
+  "sections": {
+    "featured_courses": "Featured Courses",
+    "featured_courses_sub": "Programs trusted by 5,000+ students",
+    "partners": "Trusted by leading institutions",
+    "testimonials": "What people say",
+    "contact": "Get in touch",
+    "view_all": "View all"
+  },
+  "contact": {
+    "name": "Your name",
+    "email": "Email",
+    "subject": "Subject",
+    "message": "Message",
+    "send": "Send message",
+    "sent": "Message sent — thank you!",
+    "error": "Could not send. Please try again."
+  },
+  "courses": {
+    "level_Beginner": "Beginner",
+    "level_Intermediate": "Intermediate",
+    "level_Advanced": "Advanced",
+    "view": "View course"
+  },
+  "admin": {
+    "login": "Sign in",
+    "email": "Email",
+    "password": "Password",
+    "signup": "Create account",
+    "logout": "Sign out",
+    "dashboard": "Dashboard",
+    "profile": "Profile",
+    "courses": "Courses",
+    "talks": "Talks",
+    "messages": "Messages",
+    "save": "Save",
+    "saved": "Saved",
+    "delete": "Delete",
+    "add": "Add",
+    "edit": "Edit",
+    "back": "Back to site"
+  },
+  "footer": {
+    "tagline": "Empowering the next generation of AI professionals.",
+    "made": "Made with AI in Armenia"
+  }
+}
