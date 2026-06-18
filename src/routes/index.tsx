@@ -18,6 +18,7 @@ export const Route = createFileRoute("/")({
       { property: "og:description", content: "PhD in Computer Engineering. 5,000+ students trained. 100+ workshops." },
     ],
   }),
+  ssr: false,
   component: Home,
 });
 

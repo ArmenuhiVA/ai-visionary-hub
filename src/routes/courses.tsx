@@ -19,6 +19,7 @@ export const Route = createFileRoute("/courses")({
       { property: "og:description", content: "From AI for Everyone to Deep Learning. Programs for beginners to advanced." },
     ],
   }),
+  ssr: false,
   component: Courses,
 });
 

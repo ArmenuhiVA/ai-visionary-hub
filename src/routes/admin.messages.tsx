@@ -6,6 +6,7 @@ import { toast } from "sonner";
 import { Trash2, Mail } from "lucide-react";
 
 export const Route = createFileRoute("/admin/messages")({
+  ssr: false,
   component: Messages,
 });
 

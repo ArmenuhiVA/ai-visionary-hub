@@ -4,6 +4,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { BookOpen, MessageSquare, Mic, User } from "lucide-react";
 
 export const Route = createFileRoute("/admin/")({
+  ssr: false,
   component: Dashboard,
 });
 

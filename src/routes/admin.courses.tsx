@@ -8,6 +8,7 @@ import { toast } from "sonner";
 import { Plus, Trash2, Save, X } from "lucide-react";
 
 export const Route = createFileRoute("/admin/courses")({
+  ssr: false,
   component: CoursesManager,
 });
 

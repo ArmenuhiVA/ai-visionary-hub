@@ -16,6 +16,7 @@ export const Route = createFileRoute("/blog")({
       { property: "og:description", content: "Essays on AI education, LLMs, and building with AI." },
     ],
   }),
+  ssr: false,
   component: Blog,
 });
 

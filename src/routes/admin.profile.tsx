@@ -8,6 +8,7 @@ import { toast } from "sonner";
 import { Save } from "lucide-react";
 
 export const Route = createFileRoute("/admin/profile")({
+  ssr: false,
   component: ProfileEditor,
 });
 

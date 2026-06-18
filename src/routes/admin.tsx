@@ -6,6 +6,7 @@ import { LayoutDashboard, User, BookOpen, Mic, MessageSquare, LogOut, ExternalLi
 import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/admin")({
+  ssr: false,
   component: AdminLayout,
 });
 

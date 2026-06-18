@@ -7,6 +7,7 @@ import { toast } from "sonner";
 import { Plus, Trash2, Save, X } from "lucide-react";
 
 export const Route = createFileRoute("/admin/talks")({
+  ssr: false,
   component: TalksManager,
 });
 

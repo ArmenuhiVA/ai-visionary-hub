@@ -8,6 +8,7 @@ import { Brain } from "lucide-react";
 
 export const Route = createFileRoute("/auth")({
   head: () => ({ meta: [{ title: "Sign in — Admin" }] }),
+  ssr: false,
   component: AuthPage,
 });
 

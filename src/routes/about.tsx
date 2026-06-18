@@ -16,6 +16,7 @@ export const Route = createFileRoute("/about")({
       { property: "og:description", content: "PhD in Computer Engineering, AI educator, CTO, university professor." },
     ],
   }),
+  ssr: false,
   component: About,
 });
 

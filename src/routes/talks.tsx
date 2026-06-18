@@ -18,6 +18,7 @@ export const Route = createFileRoute("/talks")({
       { property: "og:description", content: "International speaker on AI, ML, and education." },
     ],
   }),
+  ssr: false,
   component: Talks,
 });
 
