@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useChat } from "@ai-sdk/react";
 import { DefaultChatTransport } from "ai";
 import { motion, AnimatePresence } from "framer-motion";
@@ -6,6 +6,8 @@ import { Brain, X, Send } from "lucide-react";
 import ReactMarkdown from "react-markdown";
 
 export function AIChatWidget() {
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
   const [open, setOpen] = useState(false);
   const [input, setInput] = useState("");
   const { messages, sendMessage, status } = useChat({
