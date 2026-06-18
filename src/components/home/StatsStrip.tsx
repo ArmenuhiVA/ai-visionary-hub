@@ -3,7 +3,8 @@ import { useLanguage } from "@/hooks/use-language";
 import { getLocalizedField } from "@/i18n";
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
-import CountUp from "react-countup";
+import CountUpModule from "react-countup";
+const CountUp = (CountUpModule as any).default ?? CountUpModule;
 import * as Icons from "lucide-react";
 
 export function StatsStrip() {
