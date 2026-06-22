@@ -163,7 +163,7 @@ export function NeuralHero() {
             <div className="animate-float">
               <div className="animate-pulse-ring rounded-full">
                 <img
-                  src={profile?.photo_url || portrait}
+                  src={profile?.photo_url || portrait.url}
                   alt={name}
                   width={400}
                   height={400}
