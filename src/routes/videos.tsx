@@ -6,8 +6,8 @@ import { useVideos } from "@/hooks/use-videos";
 import { useLanguage } from "@/hooks/use-language";
 import { getLocalizedField } from "@/i18n";
 import { useMemo, useState } from "react";
-import { motion } from "framer-motion";
-import { Play, Clock } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Play, Clock, X } from "lucide-react";
 
 export const Route = createFileRoute("/videos")({
   head: () => ({
@@ -28,6 +28,7 @@ function Videos() {
   const { data: videos = [] } = useVideos();
   const { lang } = useLanguage();
   const [cat, setCat] = useState<string>("all");
+  const [playingId, setPlayingId] = useState<string | null>(null);
 
   const categories = useMemo<string[]>(() => {
     const set = new Set(videos.map((v) => v.category).filter((c): c is string => !!c));
@@ -35,6 +36,10 @@ function Videos() {
   }, [videos]);
 
   const filtered = cat === "all" ? videos : videos.filter((v) => v.category === cat);
+  const playing = videos.find((v) => v.id === playingId) ?? null;
+  const playingYtId =
+    playing?.youtube_id ??
+    (playing?.youtube_url?.match(/(?:v=|youtu\.be\/|embed\/)([a-zA-Z0-9_-]{11})/)?.[1] ?? null);
 
   return (
     <div className="min-h-screen">
@@ -69,15 +74,14 @@ function Videos() {
               const desc = getLocalizedField(v, "description", lang);
               const thumb = v.thumbnail_url ?? (v.youtube_id ? `https://i.ytimg.com/vi/${v.youtube_id}/hqdefault.jpg` : null);
               return (
-                <motion.a
+                <motion.button
                   key={v.id}
-                  href={v.youtube_url}
-                  target="_blank"
-                  rel="noopener"
+                  type="button"
+                  onClick={() => setPlayingId(v.id)}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: i * 0.04 }}
-                  className="group overflow-hidden rounded-2xl border border-border bg-card transition hover:border-accent"
+                  className="group overflow-hidden rounded-2xl border border-border bg-card text-left transition hover:border-accent"
                 >
                   <div className="relative aspect-video overflow-hidden bg-muted">
                     {thumb && (
@@ -99,12 +103,53 @@ function Videos() {
                     <h3 className="mt-1 font-display text-base font-semibold leading-snug">{title}</h3>
                     {desc && <p className="mt-2 line-clamp-2 text-xs text-muted-foreground">{desc}</p>}
                   </div>
-                </motion.a>
+                </motion.button>
               );
             })}
           </div>
         )}
       </main>
+
+      <AnimatePresence>
+        {playing && playingYtId && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setPlayingId(null)}
+            className="fixed inset-0 z-[100] flex items-center justify-center bg-background/90 p-4 backdrop-blur"
+          >
+            <motion.div
+              initial={{ scale: 0.95, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.95, opacity: 0 }}
+              onClick={(e) => e.stopPropagation()}
+              className="relative w-full max-w-5xl"
+            >
+              <button
+                onClick={() => setPlayingId(null)}
+                className="absolute -top-12 right-0 inline-flex items-center gap-1 rounded-full border border-border bg-card px-3 py-1.5 text-sm hover:border-accent"
+                aria-label="Close video"
+              >
+                <X className="h-4 w-4" /> Close
+              </button>
+              <div className="aspect-video overflow-hidden rounded-2xl border border-border bg-black shadow-2xl">
+                <iframe
+                  src={`https://www.youtube.com/embed/${playingYtId}?autoplay=1&rel=0`}
+                  title={getLocalizedField(playing, "title", lang) || "Video"}
+                  className="h-full w-full"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowFullScreen
+                />
+              </div>
+              <h3 className="mt-4 font-display text-xl font-semibold">
+                {getLocalizedField(playing, "title", lang)}
+              </h3>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       <SiteFooter />
       <AIChatWidget />
     </div>
