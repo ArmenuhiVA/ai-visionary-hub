@@ -5,7 +5,7 @@ import { useLanguage } from "@/hooks/use-language";
 import { useProfile } from "@/hooks/use-content";
 import { getLocalizedField } from "@/i18n";
 import { Link } from "@tanstack/react-router";
-import portrait from "@/assets/varazdat-portrait.jpg";
+import portrait from "@/assets/professor-vetisyan.jpg.asset.json";
 import { Download, ArrowRight, ChevronDown } from "lucide-react";
 
 export function NeuralHero() {
@@ -163,7 +163,7 @@ export function NeuralHero() {
             <div className="animate-float">
               <div className="animate-pulse-ring rounded-full">
                 <img
-                  src={profile?.photo_url || portrait}
+                  src={profile?.photo_url || portrait.url}
                   alt={name}
                   width={400}
                   height={400}

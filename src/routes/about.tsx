@@ -4,7 +4,7 @@ import { SiteFooter } from "@/components/layout/SiteFooter";
 import { useProfile } from "@/hooks/use-content";
 import { useLanguage } from "@/hooks/use-language";
 import { getLocalizedField } from "@/i18n";
-import portrait from "@/assets/varazdat-portrait.jpg";
+import portrait from "@/assets/professor-vetisyan.jpg.asset.json";
 import { AIChatWidget } from "@/components/shared/AIChatWidget";
 
 export const Route = createFileRoute("/about")({
@@ -28,7 +28,7 @@ function About() {
       <SiteHeader />
       <main className="mx-auto max-w-5xl px-4 pt-32 pb-20">
         <div className="grid gap-10 md:grid-cols-[260px_1fr]">
-          <img src={profile?.photo_url || portrait} alt={profile?.name} className="h-64 w-64 rounded-2xl object-cover" />
+          <img src={profile?.photo_url || portrait.url} alt={profile?.name} className="h-64 w-64 rounded-2xl object-cover" />
           <div>
             <h1 className="font-display text-4xl font-bold md:text-5xl">{profile?.name}</h1>
             <p className="mt-2 text-lg text-accent">{getLocalizedField(profile, "title", lang)}</p>
