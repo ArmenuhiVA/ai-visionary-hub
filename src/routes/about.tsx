@@ -4,7 +4,7 @@ import { SiteFooter } from "@/components/layout/SiteFooter";
 import { useProfile } from "@/hooks/use-content";
 import { useLanguage } from "@/hooks/use-language";
 import { getLocalizedField } from "@/i18n";
-import portrait from "@/assets/varazdat-portrait.jpg";
+import portrait from "@/assets/professor-vetisyan.jpg.asset.json";
 import { AIChatWidget } from "@/components/shared/AIChatWidget";
 
 export const Route = createFileRoute("/about")({
