@@ -6,6 +6,7 @@ import { useProfile } from "@/hooks/use-content";
 import { getLocalizedField } from "@/i18n";
 import { Link } from "@tanstack/react-router";
 import portrait from "@/assets/professor-vetisyan.jpg.asset.json";
+import cvAsset from "@/assets/VarazdatAvetisyanCV2025.pdf.asset.json";
 import { Download, ArrowRight, ChevronDown } from "lucide-react";
 
 export function NeuralHero() {
@@ -139,15 +140,15 @@ export function NeuralHero() {
                 {t("hero.cta_courses")}
                 <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" />
               </Link>
-              {profile?.cv_url && (
-                <a
-                  href={profile.cv_url}
-                  className="inline-flex items-center gap-2 rounded-full border border-accent px-6 py-3 font-medium text-accent transition hover:bg-accent/10"
-                >
-                  <Download className="h-4 w-4" />
-                  {t("hero.cta_cv")}
-                </a>
-              )}
+              <a
+                href={profile?.cv_url || cvAsset.url}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-2 rounded-full border border-accent px-6 py-3 font-medium text-accent transition hover:bg-accent/10"
+              >
+                <Download className="h-4 w-4" />
+                {t("hero.cta_cv")}
+              </a>
             </div>
           </motion.div>
         </div>
