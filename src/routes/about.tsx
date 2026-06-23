@@ -28,9 +28,16 @@ export const Route = createFileRoute("/about")({
   head: () => ({
     meta: [
       { title: "About — Dr. Varazdat Avetisyan" },
-      { name: "description", content: "Bio, education, expertise and experience of Dr. Varazdat Avetisyan — PhD, AI educator, CTO." },
+      {
+        name: "description",
+        content:
+          "Bio, education, expertise and experience of Dr. Varazdat Avetisyan — PhD, AI educator, CTO.",
+      },
       { property: "og:title", content: "About Dr. Varazdat Avetisyan" },
-      { property: "og:description", content: "PhD in Technical Sciences, AI educator, CTO, university professor." },
+      {
+        property: "og:description",
+        content: "PhD in Technical Sciences, AI educator, CTO, university professor.",
+      },
     ],
   }),
   ssr: false,
@@ -57,19 +64,37 @@ function About() {
               className="h-64 w-64 rounded-3xl border border-accent/40 object-cover shadow-2xl"
             />
             <div>
-              <h1 className="font-display text-4xl font-bold md:text-5xl">{profile?.name ?? "Dr. Varazdat Avetisyan"}</h1>
-              <p className="mt-2 text-lg text-accent">{getLocalizedField(profile, "title", lang)}</p>
-              <p className="mt-4 max-w-2xl text-foreground/85">{getLocalizedField(profile, "headline", lang)}</p>
+              <h1 className="font-display text-4xl font-bold md:text-5xl">
+                {profile?.name ?? "Dr. Varazdat Avetisyan"}
+              </h1>
+              <p className="mt-2 text-lg text-accent">
+                {getLocalizedField(profile, "title", lang)}
+              </p>
+              <p className="mt-4 max-w-2xl text-foreground/85">
+                {getLocalizedField(profile, "headline", lang)}
+              </p>
 
               <div className="mt-5 flex flex-wrap gap-x-5 gap-y-2 text-sm text-muted-foreground">
                 {profile?.location && (
-                  <span className="inline-flex items-center gap-1.5"><MapPin className="h-4 w-4" />{profile.location}</span>
+                  <span className="inline-flex items-center gap-1.5">
+                    <MapPin className="h-4 w-4" />
+                    {profile.location}
+                  </span>
                 )}
                 {profile?.email && (
-                  <a href={`mailto:${profile.email}`} className="inline-flex items-center gap-1.5 hover:text-accent"><Mail className="h-4 w-4" />{profile.email}</a>
+                  <a
+                    href={`mailto:${profile.email}`}
+                    className="inline-flex items-center gap-1.5 hover:text-accent"
+                  >
+                    <Mail className="h-4 w-4" />
+                    {profile.email}
+                  </a>
                 )}
                 {profile?.phone && (
-                  <span className="inline-flex items-center gap-1.5"><Phone className="h-4 w-4" />{profile.phone}</span>
+                  <span className="inline-flex items-center gap-1.5">
+                    <Phone className="h-4 w-4" />
+                    {profile.phone}
+                  </span>
                 )}
               </div>
 
@@ -83,7 +108,12 @@ function About() {
                   <Download className="h-4 w-4" /> Download CV
                 </a>
                 {profile?.linkedin_url && (
-                  <a href={profile.linkedin_url} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-full border border-border px-5 py-2.5 text-sm hover:border-accent">
+                  <a
+                    href={profile.linkedin_url}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex items-center gap-2 rounded-full border border-border px-5 py-2.5 text-sm hover:border-accent"
+                  >
                     LinkedIn <ExternalLink className="h-3.5 w-3.5" />
                   </a>
                 )}
@@ -94,8 +124,13 @@ function About() {
 
         {/* Long bio */}
         {getLocalizedField(profile, "bio", lang) && (
-          <Section icon={Sparkles} title={lang === "hy" ? "Իմ մասին" : lang === "ru" ? "Обо мне" : "About"}>
-            <p className="whitespace-pre-wrap text-foreground/85 leading-relaxed">{getLocalizedField(profile, "bio", lang)}</p>
+          <Section
+            icon={Sparkles}
+            title={lang === "hy" ? "Իմ մասին" : lang === "ru" ? "Обо мне" : "About"}
+          >
+            <p className="whitespace-pre-wrap text-foreground/85 leading-relaxed">
+              {getLocalizedField(profile, "bio", lang)}
+            </p>
           </Section>
         )}
 
@@ -137,7 +172,10 @@ function About() {
         <Section icon={BookOpen} title={cv.sections.publications}>
           <ul className="space-y-2">
             {cv.publications.map((p) => (
-              <li key={p} className="flex items-start gap-2 text-foreground/85"><span className="mt-2 h-1.5 w-1.5 rounded-full bg-primary" />{p}</li>
+              <li key={p} className="flex items-start gap-2 text-foreground/85">
+                <span className="mt-2 h-1.5 w-1.5 rounded-full bg-primary" />
+                {p}
+              </li>
             ))}
           </ul>
         </Section>
@@ -145,7 +183,10 @@ function About() {
         <Section icon={Sparkles} title={cv.sections.other}>
           <ul className="space-y-2">
             {cv.other.map((p) => (
-              <li key={p} className="flex items-start gap-2 text-foreground/85"><span className="mt-2 h-1.5 w-1.5 rounded-full bg-accent" />{p}</li>
+              <li key={p} className="flex items-start gap-2 text-foreground/85">
+                <span className="mt-2 h-1.5 w-1.5 rounded-full bg-accent" />
+                {p}
+              </li>
             ))}
           </ul>
         </Section>
@@ -213,7 +254,12 @@ function Timeline({ entries }: { entries: CvEntry[] }) {
           <div className="mt-1 font-display text-lg font-semibold">{e.role}</div>
           <div className="text-sm text-muted-foreground">
             {e.url ? (
-              <a href={e.url} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1 hover:text-accent">
+              <a
+                href={e.url}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-1 hover:text-accent"
+              >
                 {e.org} <ExternalLink className="h-3 w-3" />
               </a>
             ) : (

@@ -93,7 +93,9 @@ export function NeuralHero() {
   }, []);
 
   const name = profile?.name ?? "Dr. Varazdat Avetisyan";
-  const headline = getLocalizedField(profile, "headline", lang) || "Empowering the Next Generation of AI Professionals";
+  const headline =
+    getLocalizedField(profile, "headline", lang) ||
+    "Empowering the Next Generation of AI Professionals";
 
   return (
     <section className="relative isolate min-h-[100svh] overflow-hidden bg-brand-gradient">
@@ -113,9 +115,7 @@ export function NeuralHero() {
             </span>
             <h1 className="mt-5 font-display text-5xl font-bold leading-[1.05] md:text-7xl">
               {name.split(" ").slice(0, 2).join(" ")}{" "}
-              <span className="text-brand-gradient">
-                {name.split(" ").slice(2).join(" ")}
-              </span>
+              <span className="text-brand-gradient">{name.split(" ").slice(2).join(" ")}</span>
             </h1>
             <div className="mt-4 h-9 overflow-hidden">
               <AnimatePresence mode="wait">
