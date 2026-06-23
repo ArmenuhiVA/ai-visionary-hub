@@ -20,14 +20,20 @@ export function ImageUpload({
     setBusy(true);
     const ext = file.name.split(".").pop();
     const path = `${Date.now()}-${Math.random().toString(36).slice(2, 8)}.${ext}`;
-    const { error } = await supabase.storage.from(bucket).upload(path, file);
+    const { error } = await supabase.storage.from(bucket).upload(path, file, { upsert: true });
     if (error) {
       toast.error(error.message);
       setBusy(false);
       return;
     }
-    const { data } = supabase.storage.from(bucket).getPublicUrl(path);
-    onChange(data.publicUrl);
+    // Use long-lived signed URL since buckets are private (workspace policy)
+    const { data, error: signErr } = await supabase.storage.from(bucket).createSignedUrl(path, 60 * 60 * 24 * 365 * 10);
+    if (signErr || !data) {
+      toast.error(signErr?.message ?? "Could not generate URL");
+      setBusy(false);
+      return;
+    }
+    onChange(data.signedUrl);
     setBusy(false);
     toast.success("Uploaded");
   };
