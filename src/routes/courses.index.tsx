@@ -11,7 +11,7 @@ import { Clock, ArrowRight } from "lucide-react";
 import { Link } from "@tanstack/react-router";
 import { AIChatWidget } from "@/components/shared/AIChatWidget";
 
-export const Route = createFileRoute("/courses")({
+export const Route = createFileRoute("/courses/")({
   head: () => ({
     meta: [
       { title: "Courses — Dr. Varazdat Avetisyan" },
