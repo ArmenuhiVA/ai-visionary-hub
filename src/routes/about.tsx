@@ -59,7 +59,7 @@ function About() {
           <div className="absolute -bottom-24 -left-24 h-72 w-72 rounded-full bg-accent/20 blur-3xl" />
           <div className="relative grid items-center gap-8 md:grid-cols-[260px_1fr]">
             <img
-              src={portrait.url}git status
+              src={portrait.url}
               alt={profile?.name ?? "Dr. Varazdat Avetisyan"}
               className="h-64 w-64 rounded-3xl border border-accent/40 object-cover shadow-2xl"
             />
