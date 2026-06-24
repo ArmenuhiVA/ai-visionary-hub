@@ -11,7 +11,6 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as VideosRouteImport } from './routes/videos'
 import { Route as TalksRouteImport } from './routes/talks'
-import { Route as CoursesRouteImport } from './routes/courses'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as CompaniesRouteImport } from './routes/companies'
 import { Route as BlogRouteImport } from './routes/blog'
@@ -19,6 +18,7 @@ import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AdminRouteImport } from './routes/admin'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as CoursesIndexRouteImport } from './routes/courses.index'
 import { Route as AdminIndexRouteImport } from './routes/admin.index'
 import { Route as CoursesSlugRouteImport } from './routes/courses.$slug'
 import { Route as ApiChatRouteImport } from './routes/api/chat'
@@ -36,11 +36,6 @@ const VideosRoute = VideosRouteImport.update({
 const TalksRoute = TalksRouteImport.update({
   id: '/talks',
   path: '/talks',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const CoursesRoute = CoursesRouteImport.update({
-  id: '/courses',
-  path: '/courses',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ContactRoute = ContactRouteImport.update({
@@ -78,15 +73,20 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CoursesIndexRoute = CoursesIndexRouteImport.update({
+  id: '/courses/',
+  path: '/courses/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AdminIndexRoute = AdminIndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => AdminRoute,
 } as any)
 const CoursesSlugRoute = CoursesSlugRouteImport.update({
-  id: '/$slug',
-  path: '/$slug',
-  getParentRoute: () => CoursesRoute,
+  id: '/courses/$slug',
+  path: '/courses/$slug',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const ApiChatRoute = ApiChatRouteImport.update({
   id: '/api/chat',
@@ -127,7 +127,6 @@ export interface FileRoutesByFullPath {
   '/blog': typeof BlogRoute
   '/companies': typeof CompaniesRoute
   '/contact': typeof ContactRoute
-  '/courses': typeof CoursesRouteWithChildren
   '/talks': typeof TalksRoute
   '/videos': typeof VideosRoute
   '/admin/courses': typeof AdminCoursesRoute
@@ -138,6 +137,7 @@ export interface FileRoutesByFullPath {
   '/api/chat': typeof ApiChatRoute
   '/courses/$slug': typeof CoursesSlugRoute
   '/admin/': typeof AdminIndexRoute
+  '/courses/': typeof CoursesIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -146,7 +146,6 @@ export interface FileRoutesByTo {
   '/blog': typeof BlogRoute
   '/companies': typeof CompaniesRoute
   '/contact': typeof ContactRoute
-  '/courses': typeof CoursesRouteWithChildren
   '/talks': typeof TalksRoute
   '/videos': typeof VideosRoute
   '/admin/courses': typeof AdminCoursesRoute
@@ -157,6 +156,7 @@ export interface FileRoutesByTo {
   '/api/chat': typeof ApiChatRoute
   '/courses/$slug': typeof CoursesSlugRoute
   '/admin': typeof AdminIndexRoute
+  '/courses': typeof CoursesIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -167,7 +167,6 @@ export interface FileRoutesById {
   '/blog': typeof BlogRoute
   '/companies': typeof CompaniesRoute
   '/contact': typeof ContactRoute
-  '/courses': typeof CoursesRouteWithChildren
   '/talks': typeof TalksRoute
   '/videos': typeof VideosRoute
   '/admin/courses': typeof AdminCoursesRoute
@@ -178,6 +177,7 @@ export interface FileRoutesById {
   '/api/chat': typeof ApiChatRoute
   '/courses/$slug': typeof CoursesSlugRoute
   '/admin/': typeof AdminIndexRoute
+  '/courses/': typeof CoursesIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -189,7 +189,6 @@ export interface FileRouteTypes {
     | '/blog'
     | '/companies'
     | '/contact'
-    | '/courses'
     | '/talks'
     | '/videos'
     | '/admin/courses'
@@ -200,6 +199,7 @@ export interface FileRouteTypes {
     | '/api/chat'
     | '/courses/$slug'
     | '/admin/'
+    | '/courses/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -208,7 +208,6 @@ export interface FileRouteTypes {
     | '/blog'
     | '/companies'
     | '/contact'
-    | '/courses'
     | '/talks'
     | '/videos'
     | '/admin/courses'
@@ -219,6 +218,7 @@ export interface FileRouteTypes {
     | '/api/chat'
     | '/courses/$slug'
     | '/admin'
+    | '/courses'
   id:
     | '__root__'
     | '/'
@@ -228,7 +228,6 @@ export interface FileRouteTypes {
     | '/blog'
     | '/companies'
     | '/contact'
-    | '/courses'
     | '/talks'
     | '/videos'
     | '/admin/courses'
@@ -239,6 +238,7 @@ export interface FileRouteTypes {
     | '/api/chat'
     | '/courses/$slug'
     | '/admin/'
+    | '/courses/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -249,10 +249,11 @@ export interface RootRouteChildren {
   BlogRoute: typeof BlogRoute
   CompaniesRoute: typeof CompaniesRoute
   ContactRoute: typeof ContactRoute
-  CoursesRoute: typeof CoursesRouteWithChildren
   TalksRoute: typeof TalksRoute
   VideosRoute: typeof VideosRoute
   ApiChatRoute: typeof ApiChatRoute
+  CoursesSlugRoute: typeof CoursesSlugRoute
+  CoursesIndexRoute: typeof CoursesIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -269,13 +270,6 @@ declare module '@tanstack/react-router' {
       path: '/talks'
       fullPath: '/talks'
       preLoaderRoute: typeof TalksRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/courses': {
-      id: '/courses'
-      path: '/courses'
-      fullPath: '/courses'
-      preLoaderRoute: typeof CoursesRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/contact': {
@@ -327,6 +321,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/courses/': {
+      id: '/courses/'
+      path: '/courses'
+      fullPath: '/courses/'
+      preLoaderRoute: typeof CoursesIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/admin/': {
       id: '/admin/'
       path: '/'
@@ -336,10 +337,10 @@ declare module '@tanstack/react-router' {
     }
     '/courses/$slug': {
       id: '/courses/$slug'
-      path: '/$slug'
+      path: '/courses/$slug'
       fullPath: '/courses/$slug'
       preLoaderRoute: typeof CoursesSlugRouteImport
-      parentRoute: typeof CoursesRoute
+      parentRoute: typeof rootRouteImport
     }
     '/api/chat': {
       id: '/api/chat'
@@ -406,17 +407,6 @@ const AdminRouteChildren: AdminRouteChildren = {
 
 const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)
 
-interface CoursesRouteChildren {
-  CoursesSlugRoute: typeof CoursesSlugRoute
-}
-
-const CoursesRouteChildren: CoursesRouteChildren = {
-  CoursesSlugRoute: CoursesSlugRoute,
-}
-
-const CoursesRouteWithChildren =
-  CoursesRoute._addFileChildren(CoursesRouteChildren)
-
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
@@ -425,10 +415,11 @@ const rootRouteChildren: RootRouteChildren = {
   BlogRoute: BlogRoute,
   CompaniesRoute: CompaniesRoute,
   ContactRoute: ContactRoute,
-  CoursesRoute: CoursesRouteWithChildren,
   TalksRoute: TalksRoute,
   VideosRoute: VideosRoute,
   ApiChatRoute: ApiChatRoute,
+  CoursesSlugRoute: CoursesSlugRoute,
+  CoursesIndexRoute: CoursesIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
