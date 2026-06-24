@@ -115,7 +115,9 @@ export type Database = {
           description_hy: string | null
           description_ru: string | null
           duration: string | null
+          enrollment_url: string | null
           id: string
+          instructor: string | null
           is_featured: boolean | null
           is_published: boolean | null
           level: string | null
@@ -125,11 +127,16 @@ export type Database = {
           prerequisites_en: string | null
           prerequisites_hy: string | null
           prerequisites_ru: string | null
+          schedule_en: string | null
+          schedule_hy: string | null
+          schedule_ru: string | null
           slug: string
           sort_order: number | null
+          start_date: string | null
           title_en: string | null
           title_hy: string | null
           title_ru: string | null
+          tools: Json | null
         }
         Insert: {
           cover_image_url?: string | null
@@ -138,7 +145,9 @@ export type Database = {
           description_hy?: string | null
           description_ru?: string | null
           duration?: string | null
+          enrollment_url?: string | null
           id?: string
+          instructor?: string | null
           is_featured?: boolean | null
           is_published?: boolean | null
           level?: string | null
@@ -148,11 +157,16 @@ export type Database = {
           prerequisites_en?: string | null
           prerequisites_hy?: string | null
           prerequisites_ru?: string | null
+          schedule_en?: string | null
+          schedule_hy?: string | null
+          schedule_ru?: string | null
           slug: string
           sort_order?: number | null
+          start_date?: string | null
           title_en?: string | null
           title_hy?: string | null
           title_ru?: string | null
+          tools?: Json | null
         }
         Update: {
           cover_image_url?: string | null
@@ -161,7 +175,9 @@ export type Database = {
           description_hy?: string | null
           description_ru?: string | null
           duration?: string | null
+          enrollment_url?: string | null
           id?: string
+          instructor?: string | null
           is_featured?: boolean | null
           is_published?: boolean | null
           level?: string | null
@@ -171,11 +187,16 @@ export type Database = {
           prerequisites_en?: string | null
           prerequisites_hy?: string | null
           prerequisites_ru?: string | null
+          schedule_en?: string | null
+          schedule_hy?: string | null
+          schedule_ru?: string | null
           slug?: string
           sort_order?: number | null
+          start_date?: string | null
           title_en?: string | null
           title_hy?: string | null
           title_ru?: string | null
+          tools?: Json | null
         }
         Relationships: []
       }
