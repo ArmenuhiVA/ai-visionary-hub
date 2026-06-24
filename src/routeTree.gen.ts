@@ -20,6 +20,7 @@ import { Route as AdminRouteImport } from './routes/admin'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AdminIndexRouteImport } from './routes/admin.index'
+import { Route as CoursesSlugRouteImport } from './routes/courses.$slug'
 import { Route as ApiChatRouteImport } from './routes/api/chat'
 import { Route as AdminVideosRouteImport } from './routes/admin.videos'
 import { Route as AdminTalksRouteImport } from './routes/admin.talks'
@@ -82,6 +83,11 @@ const AdminIndexRoute = AdminIndexRouteImport.update({
   path: '/',
   getParentRoute: () => AdminRoute,
 } as any)
+const CoursesSlugRoute = CoursesSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => CoursesRoute,
+} as any)
 const ApiChatRoute = ApiChatRouteImport.update({
   id: '/api/chat',
   path: '/api/chat',
@@ -121,7 +127,7 @@ export interface FileRoutesByFullPath {
   '/blog': typeof BlogRoute
   '/companies': typeof CompaniesRoute
   '/contact': typeof ContactRoute
-  '/courses': typeof CoursesRoute
+  '/courses': typeof CoursesRouteWithChildren
   '/talks': typeof TalksRoute
   '/videos': typeof VideosRoute
   '/admin/courses': typeof AdminCoursesRoute
@@ -130,6 +136,7 @@ export interface FileRoutesByFullPath {
   '/admin/talks': typeof AdminTalksRoute
   '/admin/videos': typeof AdminVideosRoute
   '/api/chat': typeof ApiChatRoute
+  '/courses/$slug': typeof CoursesSlugRoute
   '/admin/': typeof AdminIndexRoute
 }
 export interface FileRoutesByTo {
@@ -139,7 +146,7 @@ export interface FileRoutesByTo {
   '/blog': typeof BlogRoute
   '/companies': typeof CompaniesRoute
   '/contact': typeof ContactRoute
-  '/courses': typeof CoursesRoute
+  '/courses': typeof CoursesRouteWithChildren
   '/talks': typeof TalksRoute
   '/videos': typeof VideosRoute
   '/admin/courses': typeof AdminCoursesRoute
@@ -148,6 +155,7 @@ export interface FileRoutesByTo {
   '/admin/talks': typeof AdminTalksRoute
   '/admin/videos': typeof AdminVideosRoute
   '/api/chat': typeof ApiChatRoute
+  '/courses/$slug': typeof CoursesSlugRoute
   '/admin': typeof AdminIndexRoute
 }
 export interface FileRoutesById {
@@ -159,7 +167,7 @@ export interface FileRoutesById {
   '/blog': typeof BlogRoute
   '/companies': typeof CompaniesRoute
   '/contact': typeof ContactRoute
-  '/courses': typeof CoursesRoute
+  '/courses': typeof CoursesRouteWithChildren
   '/talks': typeof TalksRoute
   '/videos': typeof VideosRoute
   '/admin/courses': typeof AdminCoursesRoute
@@ -168,6 +176,7 @@ export interface FileRoutesById {
   '/admin/talks': typeof AdminTalksRoute
   '/admin/videos': typeof AdminVideosRoute
   '/api/chat': typeof ApiChatRoute
+  '/courses/$slug': typeof CoursesSlugRoute
   '/admin/': typeof AdminIndexRoute
 }
 export interface FileRouteTypes {
@@ -189,6 +198,7 @@ export interface FileRouteTypes {
     | '/admin/talks'
     | '/admin/videos'
     | '/api/chat'
+    | '/courses/$slug'
     | '/admin/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -207,6 +217,7 @@ export interface FileRouteTypes {
     | '/admin/talks'
     | '/admin/videos'
     | '/api/chat'
+    | '/courses/$slug'
     | '/admin'
   id:
     | '__root__'
@@ -226,6 +237,7 @@ export interface FileRouteTypes {
     | '/admin/talks'
     | '/admin/videos'
     | '/api/chat'
+    | '/courses/$slug'
     | '/admin/'
   fileRoutesById: FileRoutesById
 }
@@ -237,7 +249,7 @@ export interface RootRouteChildren {
   BlogRoute: typeof BlogRoute
   CompaniesRoute: typeof CompaniesRoute
   ContactRoute: typeof ContactRoute
-  CoursesRoute: typeof CoursesRoute
+  CoursesRoute: typeof CoursesRouteWithChildren
   TalksRoute: typeof TalksRoute
   VideosRoute: typeof VideosRoute
   ApiChatRoute: typeof ApiChatRoute
@@ -322,6 +334,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminIndexRouteImport
       parentRoute: typeof AdminRoute
     }
+    '/courses/$slug': {
+      id: '/courses/$slug'
+      path: '/$slug'
+      fullPath: '/courses/$slug'
+      preLoaderRoute: typeof CoursesSlugRouteImport
+      parentRoute: typeof CoursesRoute
+    }
     '/api/chat': {
       id: '/api/chat'
       path: '/api/chat'
@@ -387,6 +406,17 @@ const AdminRouteChildren: AdminRouteChildren = {
 
 const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)
 
+interface CoursesRouteChildren {
+  CoursesSlugRoute: typeof CoursesSlugRoute
+}
+
+const CoursesRouteChildren: CoursesRouteChildren = {
+  CoursesSlugRoute: CoursesSlugRoute,
+}
+
+const CoursesRouteWithChildren =
+  CoursesRoute._addFileChildren(CoursesRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
@@ -395,7 +425,7 @@ const rootRouteChildren: RootRouteChildren = {
   BlogRoute: BlogRoute,
   CompaniesRoute: CompaniesRoute,
   ContactRoute: ContactRoute,
-  CoursesRoute: CoursesRoute,
+  CoursesRoute: CoursesRouteWithChildren,
   TalksRoute: TalksRoute,
   VideosRoute: VideosRoute,
   ApiChatRoute: ApiChatRoute,

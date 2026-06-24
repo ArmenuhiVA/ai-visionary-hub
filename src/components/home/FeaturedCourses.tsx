@@ -36,7 +36,8 @@ export function FeaturedCourses() {
             whileHover={{ y: -6 }}
           >
             <Link
-              to="/courses"
+              to="/courses/$slug"
+              params={{ slug: c.slug }}
               className="group relative block h-full overflow-hidden rounded-2xl border border-border bg-card p-6 transition hover:border-primary/50"
             >
               <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-primary via-accent to-primary opacity-0 transition group-hover:opacity-100" />

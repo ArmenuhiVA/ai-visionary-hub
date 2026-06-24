@@ -7,7 +7,8 @@ import { getLocalizedField } from "@/i18n";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { motion } from "framer-motion";
-import { Clock } from "lucide-react";
+import { Clock, ArrowRight } from "lucide-react";
+import { Link } from "@tanstack/react-router";
 import { AIChatWidget } from "@/components/shared/AIChatWidget";
 
 export const Route = createFileRoute("/courses")({
@@ -64,20 +65,26 @@ function Courses() {
 
         <div className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {filtered.map((c, i) => (
-            <motion.article
+            <motion.div
               key={c.id}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: i * 0.05 }}
-              className="rounded-2xl border border-border bg-card p-6 transition hover:border-primary/50"
             >
-              <span className="rounded-full border border-border px-3 py-0.5 text-xs">{t(`courses.level_${c.level}`)}</span>
-              <h3 className="mt-4 font-display text-xl font-semibold">{getLocalizedField(c, "title", lang)}</h3>
-              <p className="mt-2 text-sm text-muted-foreground line-clamp-3">{getLocalizedField(c, "description", lang)}</p>
-              <div className="mt-4 inline-flex items-center gap-1 text-xs text-muted-foreground">
-                <Clock className="h-3 w-3" /> {c.duration}
-              </div>
-            </motion.article>
+              <Link
+                to="/courses/$slug"
+                params={{ slug: c.slug }}
+                className="group block h-full rounded-2xl border border-border bg-card p-6 transition hover:border-primary/50"
+              >
+                <span className="rounded-full border border-border px-3 py-0.5 text-xs">{t(`courses.level_${c.level}`)}</span>
+                <h3 className="mt-4 font-display text-xl font-semibold">{getLocalizedField(c, "title", lang)}</h3>
+                <p className="mt-2 text-sm text-muted-foreground line-clamp-3">{getLocalizedField(c, "description", lang)}</p>
+                <div className="mt-4 flex items-center justify-between text-xs text-muted-foreground">
+                  <span className="inline-flex items-center gap-1"><Clock className="h-3 w-3" /> {c.duration}</span>
+                  <span className="inline-flex items-center gap-1 text-accent group-hover:translate-x-0.5 transition">{t("courses.view")} <ArrowRight className="h-3 w-3" /></span>
+                </div>
+              </Link>
+            </motion.div>
           ))}
         </div>
       </main>
