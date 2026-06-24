@@ -7,7 +7,8 @@ import { getLocalizedField } from "@/i18n";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { motion } from "framer-motion";
-import { Clock } from "lucide-react";
+import { Clock, ArrowRight } from "lucide-react";
+import { Link } from "@tanstack/react-router";
 import { AIChatWidget } from "@/components/shared/AIChatWidget";
 
 export const Route = createFileRoute("/courses")({
