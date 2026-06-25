@@ -24,6 +24,7 @@ import { Route as CoursesSlugRouteImport } from './routes/courses.$slug'
 import { Route as ApiChatRouteImport } from './routes/api/chat'
 import { Route as AdminVideosRouteImport } from './routes/admin.videos'
 import { Route as AdminTalksRouteImport } from './routes/admin.talks'
+import { Route as AdminSettingsRouteImport } from './routes/admin.settings'
 import { Route as AdminProfileRouteImport } from './routes/admin.profile'
 import { Route as AdminMessagesRouteImport } from './routes/admin.messages'
 import { Route as AdminCoursesRouteImport } from './routes/admin.courses'
@@ -103,6 +104,11 @@ const AdminTalksRoute = AdminTalksRouteImport.update({
   path: '/talks',
   getParentRoute: () => AdminRoute,
 } as any)
+const AdminSettingsRoute = AdminSettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => AdminRoute,
+} as any)
 const AdminProfileRoute = AdminProfileRouteImport.update({
   id: '/profile',
   path: '/profile',
@@ -132,6 +138,7 @@ export interface FileRoutesByFullPath {
   '/admin/courses': typeof AdminCoursesRoute
   '/admin/messages': typeof AdminMessagesRoute
   '/admin/profile': typeof AdminProfileRoute
+  '/admin/settings': typeof AdminSettingsRoute
   '/admin/talks': typeof AdminTalksRoute
   '/admin/videos': typeof AdminVideosRoute
   '/api/chat': typeof ApiChatRoute
@@ -151,6 +158,7 @@ export interface FileRoutesByTo {
   '/admin/courses': typeof AdminCoursesRoute
   '/admin/messages': typeof AdminMessagesRoute
   '/admin/profile': typeof AdminProfileRoute
+  '/admin/settings': typeof AdminSettingsRoute
   '/admin/talks': typeof AdminTalksRoute
   '/admin/videos': typeof AdminVideosRoute
   '/api/chat': typeof ApiChatRoute
@@ -172,6 +180,7 @@ export interface FileRoutesById {
   '/admin/courses': typeof AdminCoursesRoute
   '/admin/messages': typeof AdminMessagesRoute
   '/admin/profile': typeof AdminProfileRoute
+  '/admin/settings': typeof AdminSettingsRoute
   '/admin/talks': typeof AdminTalksRoute
   '/admin/videos': typeof AdminVideosRoute
   '/api/chat': typeof ApiChatRoute
@@ -194,6 +203,7 @@ export interface FileRouteTypes {
     | '/admin/courses'
     | '/admin/messages'
     | '/admin/profile'
+    | '/admin/settings'
     | '/admin/talks'
     | '/admin/videos'
     | '/api/chat'
@@ -213,6 +223,7 @@ export interface FileRouteTypes {
     | '/admin/courses'
     | '/admin/messages'
     | '/admin/profile'
+    | '/admin/settings'
     | '/admin/talks'
     | '/admin/videos'
     | '/api/chat'
@@ -233,6 +244,7 @@ export interface FileRouteTypes {
     | '/admin/courses'
     | '/admin/messages'
     | '/admin/profile'
+    | '/admin/settings'
     | '/admin/talks'
     | '/admin/videos'
     | '/api/chat'
@@ -363,6 +375,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminTalksRouteImport
       parentRoute: typeof AdminRoute
     }
+    '/admin/settings': {
+      id: '/admin/settings'
+      path: '/settings'
+      fullPath: '/admin/settings'
+      preLoaderRoute: typeof AdminSettingsRouteImport
+      parentRoute: typeof AdminRoute
+    }
     '/admin/profile': {
       id: '/admin/profile'
       path: '/profile'
@@ -391,6 +410,7 @@ interface AdminRouteChildren {
   AdminCoursesRoute: typeof AdminCoursesRoute
   AdminMessagesRoute: typeof AdminMessagesRoute
   AdminProfileRoute: typeof AdminProfileRoute
+  AdminSettingsRoute: typeof AdminSettingsRoute
   AdminTalksRoute: typeof AdminTalksRoute
   AdminVideosRoute: typeof AdminVideosRoute
   AdminIndexRoute: typeof AdminIndexRoute
@@ -400,6 +420,7 @@ const AdminRouteChildren: AdminRouteChildren = {
   AdminCoursesRoute: AdminCoursesRoute,
   AdminMessagesRoute: AdminMessagesRoute,
   AdminProfileRoute: AdminProfileRoute,
+  AdminSettingsRoute: AdminSettingsRoute,
   AdminTalksRoute: AdminTalksRoute,
   AdminVideosRoute: AdminVideosRoute,
   AdminIndexRoute: AdminIndexRoute,
@@ -424,13 +445,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
