@@ -70,21 +70,17 @@ function Companies() {
                     transition={{ delay: i * 0.04 }}
                     className="flex flex-col gap-3 rounded-2xl border border-border bg-card p-5"
                   >
-                    <div className="flex h-16 items-center">
+                    <div className="flex items-center gap-3">
                       {p.logo_url ? (
-                        <img src={p.logo_url} alt={p.name} className="max-h-12 w-auto opacity-90" />
-                      ) : (
-                        <span className="font-display text-lg font-semibold text-muted-foreground">{p.name}</span>
-                      )}
-                    </div>
-                    <div>
+                        <img src={p.logo_url} alt={p.name} className="h-10 w-auto opacity-90" />
+                      ) : null}
                       <h3 className="font-display text-base font-semibold">{p.name}</h3>
-                      {getLocalizedField(p, "description", lang) && (
-                        <p className="mt-1 line-clamp-3 text-xs text-muted-foreground">
-                          {getLocalizedField(p, "description", lang)}
-                        </p>
-                      )}
                     </div>
+                    {getLocalizedField(p, "description", lang) && (
+                      <p className="line-clamp-3 text-xs text-muted-foreground">
+                        {getLocalizedField(p, "description", lang)}
+                      </p>
+                    )}
                     {p.website_url && (
                       <a
                         href={p.website_url}

@@ -41,9 +41,9 @@ export function ContactSection() {
               <MapPin className="h-4 w-4" /> {profile?.location}
             </div>
             <div className="flex gap-3 pt-3">
-              {profile?.linkedin_url && <IconLink href={profile.linkedin_url}><Linkedin className="h-4 w-4" /></IconLink>}
+              <IconLink href="https://www.linkedin.com/in/varazdat-avetisyan-phd-66346650/"><Linkedin className="h-4 w-4" /></IconLink>
               {profile?.github_url && <IconLink href={profile.github_url}><Github className="h-4 w-4" /></IconLink>}
-              {profile?.youtube_url && <IconLink href={profile.youtube_url}><Youtube className="h-4 w-4" /></IconLink>}
+              <IconLink href="https://www.youtube.com/@varazdatavetisyan3780"><Youtube className="h-4 w-4" /></IconLink>
             </div>
           </div>
         </div>
