@@ -14,9 +14,12 @@ export function PartnersMarquee() {
       <div className="relative mt-6 flex overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
         <div className="flex shrink-0 animate-marquee gap-12 pr-12">
           {doubled.map((p, i) => (
-            <div key={`${p.id}-${i}`} className="flex h-12 shrink-0 items-center px-6">
+            <div key={`${p.id}-${i}`} className="flex h-12 shrink-0 items-center gap-3 px-6">
               {p.logo_url ? (
-                <img src={p.logo_url} alt={p.name} className="h-10 w-auto opacity-70 grayscale transition hover:opacity-100 hover:grayscale-0" />
+                <>
+                  <img src={p.logo_url} alt={p.name} className="h-10 w-auto opacity-70 grayscale transition hover:opacity-100 hover:grayscale-0" />
+                  <span className="font-display text-lg font-semibold text-muted-foreground/70 whitespace-nowrap">{p.name}</span>
+                </>
               ) : (
                 <span className="font-display text-lg font-semibold text-muted-foreground/70">{p.name}</span>
               )}

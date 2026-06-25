@@ -21,7 +21,7 @@ export function FeaturedCourses() {
     <section className="mx-auto max-w-7xl px-4 py-24">
       <div className="flex items-end justify-between">
         <div>
-          <div className="font-mono text-xs uppercase tracking-widest text-accent">// {t("sections.featured_courses")}</div>
+          <div className="font-mono text-xs uppercase tracking-widest text-accent">{t("sections.featured_courses")}</div>
           <h2 className="mt-2 font-display text-3xl font-bold md:text-5xl">{t("sections.featured_courses_sub")}</h2>
         </div>
       </div>

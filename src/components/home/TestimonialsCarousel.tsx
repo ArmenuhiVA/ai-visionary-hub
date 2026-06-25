@@ -23,7 +23,7 @@ export function TestimonialsCarousel() {
 
   return (
     <section className="mx-auto max-w-4xl px-4 py-24 text-center">
-      <div className="font-mono text-xs uppercase tracking-widest text-accent">// {t("sections.testimonials")}</div>
+      <div className="font-mono text-xs uppercase tracking-widest text-accent">{t("sections.testimonials")}</div>
       <div className="relative mt-10 min-h-[180px]">
         <AnimatePresence mode="wait">
           <motion.blockquote
