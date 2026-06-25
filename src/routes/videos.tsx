@@ -45,7 +45,7 @@ function Videos() {
     <div className="min-h-screen">
       <SiteHeader />
       <main className="mx-auto max-w-7xl px-4 pt-32 pb-20">
-        <div className="font-mono text-xs uppercase tracking-widest text-accent">// Video Library</div>
+        <div className="font-mono text-xs uppercase tracking-widest text-accent">Video Library</div>
         <h1 className="mt-2 font-display text-4xl font-bold md:text-6xl">Video Courses</h1>
         <p className="mt-3 max-w-2xl text-muted-foreground">
           Free lessons on Artificial Intelligence, Data Science, Machine Learning, Python, and Prompt Engineering.
