@@ -17,8 +17,12 @@ type Video = {
   youtube_url: string | null;
   youtube_id: string | null;
   thumbnail_url: string | null;
-  title_hy: string | null; title_ru: string | null; title_en: string | null;
-  description_hy: string | null; description_ru: string | null; description_en: string | null;
+  title_hy: string | null;
+  title_ru: string | null;
+  title_en: string | null;
+  description_hy: string | null;
+  description_ru: string | null;
+  description_en: string | null;
   category: string | null;
   duration: string | null;
   sort_order: number | null;
@@ -54,8 +58,12 @@ const emptyVideo = (sortOrder: number): Video => ({
   youtube_url: "",
   youtube_id: null,
   thumbnail_url: null,
-  title_en: "", title_hy: "", title_ru: "",
-  description_en: "", description_hy: "", description_ru: "",
+  title_en: "",
+  title_hy: "",
+  title_ru: "",
+  description_en: "",
+  description_hy: "",
+  description_ru: "",
   category: "AI",
   duration: "",
   sort_order: sortOrder,
@@ -150,7 +158,9 @@ function VideosManager() {
           </thead>
           <tbody>
             {videos.map((v) => {
-              const thumb = v.thumbnail_url ?? (v.youtube_id ? `https://i.ytimg.com/vi/${v.youtube_id}/hqdefault.jpg` : null);
+              const thumb =
+                v.thumbnail_url ??
+                (v.youtube_id ? `https://i.ytimg.com/vi/${v.youtube_id}/hqdefault.jpg` : null);
               return (
                 <tr key={v.id} className="border-t border-border hover:bg-muted/30">
                   <td className="px-4 py-3">
@@ -161,9 +171,16 @@ function VideosManager() {
                     )}
                   </td>
                   <td className="px-4 py-3 font-medium">
-                    <div>{v.title_en || <span className="text-muted-foreground">Untitled</span>}</div>
+                    <div>
+                      {v.title_en || <span className="text-muted-foreground">Untitled</span>}
+                    </div>
                     {v.youtube_url && (
-                      <a href={v.youtube_url} target="_blank" rel="noopener" className="mt-0.5 inline-flex items-center gap-1 text-xs text-accent hover:underline">
+                      <a
+                        href={v.youtube_url}
+                        target="_blank"
+                        rel="noopener"
+                        className="mt-0.5 inline-flex items-center gap-1 text-xs text-accent hover:underline"
+                      >
                         YouTube <ExternalLink className="h-3 w-3" />
                       </a>
                     )}
@@ -173,14 +190,26 @@ function VideosManager() {
                   <td className="px-4 py-3">
                     <button
                       onClick={() => togglePublish.mutate(v)}
-                      className={v.is_published ? "text-emerald-400 hover:underline" : "text-muted-foreground hover:underline"}
+                      className={
+                        v.is_published
+                          ? "text-emerald-400 hover:underline"
+                          : "text-muted-foreground hover:underline"
+                      }
                     >
                       {v.is_published ? "Published" : "Draft"}
                     </button>
                   </td>
                   <td className="px-4 py-3 text-right">
-                    <button onClick={() => setEditing(v)} className="rounded-md px-2 py-1 text-xs hover:bg-muted">Edit</button>
-                    <button onClick={() => confirm("Delete this video?") && del.mutate(v.id)} className="rounded-md px-2 py-1 text-xs text-destructive hover:bg-muted">
+                    <button
+                      onClick={() => setEditing(v)}
+                      className="rounded-md px-2 py-1 text-xs hover:bg-muted"
+                    >
+                      Edit
+                    </button>
+                    <button
+                      onClick={() => confirm("Delete this video?") && del.mutate(v.id)}
+                      className="rounded-md px-2 py-1 text-xs text-destructive hover:bg-muted"
+                    >
                       <Trash2 className="h-3.5 w-3.5" />
                     </button>
                   </td>
@@ -188,7 +217,11 @@ function VideosManager() {
               );
             })}
             {videos.length === 0 && (
-              <tr><td colSpan={6} className="px-4 py-12 text-center text-muted-foreground">No videos yet — click "Add video" to create one.</td></tr>
+              <tr>
+                <td colSpan={6} className="px-4 py-12 text-center text-muted-foreground">
+                  No videos yet — click "Add video" to create one.
+                </td>
+              </tr>
             )}
           </tbody>
         </table>
@@ -218,23 +251,30 @@ function VideoEditor({
   saving: boolean;
 }) {
   const [form, setForm] = useState<Video>(video);
-  const setMulti = (field: "title" | "description") => (lang: "hy" | "ru" | "en", value: string) => {
-    setForm((f) => ({ ...f, [`${field}_${lang}`]: value }));
-  };
+  const setMulti =
+    (field: "title" | "description") => (lang: "hy" | "ru" | "en", value: string) => {
+      setForm((f) => ({ ...f, [`${field}_${lang}`]: value }));
+    };
 
   const detectedId = extractYouTubeId(form.youtube_url);
-  const previewThumb = form.thumbnail_url ?? (detectedId ? `https://i.ytimg.com/vi/${detectedId}/hqdefault.jpg` : null);
+  const previewThumb =
+    form.thumbnail_url ??
+    (detectedId ? `https://i.ytimg.com/vi/${detectedId}/hqdefault.jpg` : null);
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4">
       <div className="max-h-[90vh] w-full max-w-2xl overflow-y-auto rounded-2xl border border-border bg-card p-6">
         <div className="flex items-center justify-between">
           <h2 className="font-display text-xl font-bold">{form.id ? "Edit video" : "New video"}</h2>
-          <button onClick={onClose}><X className="h-5 w-5" /></button>
+          <button onClick={onClose}>
+            <X className="h-5 w-5" />
+          </button>
         </div>
         <div className="mt-6 space-y-4">
           <div>
-            <label className="mb-1 block text-xs font-medium text-muted-foreground">YouTube URL</label>
+            <label className="mb-1 block text-xs font-medium text-muted-foreground">
+              YouTube URL
+            </label>
             <input
               value={form.youtube_url ?? ""}
               onChange={(e) => setForm({ ...form, youtube_url: e.target.value })}
@@ -242,13 +282,19 @@ function VideoEditor({
               className="w-full rounded-lg border border-border bg-input px-3 py-2 text-sm"
             />
             {detectedId && (
-              <p className="mt-1 text-xs text-muted-foreground">Detected video id: <span className="font-mono text-accent">{detectedId}</span></p>
+              <p className="mt-1 text-xs text-muted-foreground">
+                Detected video id: <span className="font-mono text-accent">{detectedId}</span>
+              </p>
             )}
           </div>
 
           {previewThumb && (
             <div className="overflow-hidden rounded-lg border border-border">
-              <img src={previewThumb} alt="Thumbnail preview" className="aspect-video w-full object-cover" />
+              <img
+                src={previewThumb}
+                alt="Thumbnail preview"
+                className="aspect-video w-full object-cover"
+              />
             </div>
           )}
 
@@ -274,17 +320,23 @@ function VideoEditor({
 
           <div className="grid gap-3 md:grid-cols-3">
             <div>
-              <label className="mb-1 block text-xs font-medium text-muted-foreground">Category</label>
+              <label className="mb-1 block text-xs font-medium text-muted-foreground">
+                Category
+              </label>
               <select
                 value={form.category ?? ""}
                 onChange={(e) => setForm({ ...form, category: e.target.value })}
                 className="w-full rounded-lg border border-border bg-input px-3 py-2 text-sm"
               >
-                {CATEGORIES.map((c) => <option key={c}>{c}</option>)}
+                {CATEGORIES.map((c) => (
+                  <option key={c}>{c}</option>
+                ))}
               </select>
             </div>
             <div>
-              <label className="mb-1 block text-xs font-medium text-muted-foreground">Duration</label>
+              <label className="mb-1 block text-xs font-medium text-muted-foreground">
+                Duration
+              </label>
               <input
                 value={form.duration ?? ""}
                 onChange={(e) => setForm({ ...form, duration: e.target.value })}
@@ -293,7 +345,9 @@ function VideoEditor({
               />
             </div>
             <div>
-              <label className="mb-1 block text-xs font-medium text-muted-foreground">Sort order</label>
+              <label className="mb-1 block text-xs font-medium text-muted-foreground">
+                Sort order
+              </label>
               <input
                 type="number"
                 value={form.sort_order ?? 0}
@@ -313,7 +367,9 @@ function VideoEditor({
           </label>
         </div>
         <div className="mt-6 flex justify-end gap-2">
-          <button onClick={onClose} className="rounded-lg border border-border px-4 py-2 text-sm">Cancel</button>
+          <button onClick={onClose} className="rounded-lg border border-border px-4 py-2 text-sm">
+            Cancel
+          </button>
           <button
             onClick={() => onSave(form)}
             disabled={saving || !form.youtube_url}

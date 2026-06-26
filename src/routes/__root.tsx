@@ -20,8 +20,13 @@ function NotFoundComponent() {
       <div className="max-w-md text-center">
         <h1 className="font-display text-7xl font-bold text-brand-gradient">404</h1>
         <h2 className="mt-4 text-xl font-semibold">Page not found</h2>
-        <p className="mt-2 text-sm text-muted-foreground">The page you're looking for doesn't exist.</p>
-        <Link to="/" className="mt-6 inline-flex rounded-full bg-primary px-4 py-2 text-sm font-medium text-primary-foreground">
+        <p className="mt-2 text-sm text-muted-foreground">
+          The page you're looking for doesn't exist.
+        </p>
+        <Link
+          to="/"
+          className="mt-6 inline-flex rounded-full bg-primary px-4 py-2 text-sm font-medium text-primary-foreground"
+        >
           Go home
         </Link>
       </div>
@@ -31,13 +36,21 @@ function NotFoundComponent() {
 
 function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
   const router = useRouter();
-  useEffect(() => { reportLovableError(error, { boundary: "root" }); }, [error]);
+  useEffect(() => {
+    reportLovableError(error, { boundary: "root" });
+  }, [error]);
   return (
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
       <div className="max-w-md text-center">
         <h1 className="font-display text-xl font-semibold">Something went wrong</h1>
         <p className="mt-2 text-sm text-muted-foreground">{error.message}</p>
-        <button onClick={() => { router.invalidate(); reset(); }} className="mt-6 rounded-full bg-primary px-4 py-2 text-sm font-medium text-primary-foreground">
+        <button
+          onClick={() => {
+            router.invalidate();
+            reset();
+          }}
+          className="mt-6 rounded-full bg-primary px-4 py-2 text-sm font-medium text-primary-foreground"
+        >
           Try again
         </button>
       </div>
@@ -51,22 +64,45 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { title: "Dr. Varazdat Avetisyan — AI Educator & Speaker" },
-      { name: "description", content: "Personal site of Dr. Varazdat Avetisyan — PhD, AI educator, data scientist, CTO, and international speaker from Yerevan, Armenia." },
+      {
+        name: "description",
+        content:
+          "Personal site of Dr. Varazdat Avetisyan — PhD, AI educator, data scientist, CTO, and international speaker from Yerevan, Armenia.",
+      },
       { name: "author", content: "Dr. Varazdat Avetisyan" },
       { property: "og:title", content: "Dr. Varazdat Avetisyan — AI Educator & Speaker" },
-      { property: "og:description", content: "Personal site of Dr. Varazdat Avetisyan — PhD, AI educator, data scientist, CTO, and international speaker from Yerevan, Armenia." },
+      {
+        property: "og:description",
+        content:
+          "Personal site of Dr. Varazdat Avetisyan — PhD, AI educator, data scientist, CTO, and international speaker from Yerevan, Armenia.",
+      },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: "Dr. Varazdat Avetisyan — AI Educator & Speaker" },
-      { name: "twitter:description", content: "Personal site of Dr. Varazdat Avetisyan — PhD, AI educator, data scientist, CTO, and international speaker from Yerevan, Armenia." },
-      { property: "og:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/3e3e32e3-f146-4611-9273-1be8472b1303" },
-      { name: "twitter:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/3e3e32e3-f146-4611-9273-1be8472b1303" },
+      {
+        name: "twitter:description",
+        content:
+          "Personal site of Dr. Varazdat Avetisyan — PhD, AI educator, data scientist, CTO, and international speaker from Yerevan, Armenia.",
+      },
+      {
+        property: "og:image",
+        content:
+          "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/3e3e32e3-f146-4611-9273-1be8472b1303",
+      },
+      {
+        name: "twitter:image",
+        content:
+          "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/3e3e32e3-f146-4611-9273-1be8472b1303",
+      },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
-      { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" },
+      {
+        rel: "stylesheet",
+        href: "https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap",
+      },
     ],
   }),
   shellComponent: RootShell,
@@ -78,8 +114,13 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 function RootShell({ children }: { children: ReactNode }) {
   return (
     <html lang="en" className="dark">
-      <head><HeadContent /></head>
-      <body>{children}<Scripts /></body>
+      <head>
+        <HeadContent />
+      </head>
+      <body>
+        {children}
+        <Scripts />
+      </body>
     </html>
   );
 }
@@ -94,7 +135,8 @@ function RootComponent() {
     "@type": "Person",
     name: "Dr. Varazdat Avetisyan",
     jobTitle: "AI Educator, CTO & International Speaker",
-    description: "PhD in Technical Sciences. AI educator, data scientist, CTO, and international speaker from Yerevan, Armenia.",
+    description:
+      "PhD in Technical Sciences. AI educator, data scientist, CTO, and international speaker from Yerevan, Armenia.",
     url: "https://ai-visionary-hub.vercel.app",
     sameAs: [
       "https://www.linkedin.com/in/varazdat-avetisyan-phd-66346650/",
@@ -105,7 +147,14 @@ function RootComponent() {
       addressLocality: "Yerevan",
       addressCountry: "AM",
     },
-    knowsAbout: ["Artificial Intelligence", "Machine Learning", "Deep Learning", "Data Science", "Python", "LLMs"],
+    knowsAbout: [
+      "Artificial Intelligence",
+      "Machine Learning",
+      "Deep Learning",
+      "Data Science",
+      "Python",
+      "LLMs",
+    ],
   };
 
   return (

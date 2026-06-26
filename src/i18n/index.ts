@@ -29,7 +29,9 @@ if (!i18n.isInitialized) {
       setTimeout(() => i18n.changeLanguage(stored), 0);
     }
     i18n.on("languageChanged", (lng) => {
-      try { window.localStorage.setItem("preferred_language", lng); } catch {}
+      try {
+        window.localStorage.setItem("preferred_language", lng);
+      } catch {}
     });
   }
 }

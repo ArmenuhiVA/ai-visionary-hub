@@ -48,17 +48,25 @@ export function AIChatWidget() {
                 <div className="font-display text-sm font-semibold">Varazdat AI</div>
                 <div className="text-xs text-muted-foreground">Ask anything about my work</div>
               </div>
-              <button onClick={() => setOpen(false)} aria-label="Close"><X className="h-4 w-4" /></button>
+              <button onClick={() => setOpen(false)} aria-label="Close">
+                <X className="h-4 w-4" />
+              </button>
             </div>
             <div className="flex-1 space-y-3 overflow-y-auto p-3 text-sm">
               {messages.length === 0 && (
                 <div className="text-center text-xs text-muted-foreground py-6">
-                  Hi! I'm an AI assistant trained on Dr. Varazdat's work. Ask me about courses, talks, or AI in general.
+                  Hi! I'm an AI assistant trained on Dr. Varazdat's work. Ask me about courses,
+                  talks, or AI in general.
                 </div>
               )}
               {messages.map((m) => (
-                <div key={m.id} className={m.role === "user" ? "flex justify-end" : "flex justify-start"}>
-                  <div className={`max-w-[85%] rounded-2xl px-3 py-2 ${m.role === "user" ? "bg-primary text-primary-foreground" : "bg-muted"}`}>
+                <div
+                  key={m.id}
+                  className={m.role === "user" ? "flex justify-end" : "flex justify-start"}
+                >
+                  <div
+                    className={`max-w-[85%] rounded-2xl px-3 py-2 ${m.role === "user" ? "bg-primary text-primary-foreground" : "bg-muted"}`}
+                  >
                     {m.parts.map((p, i) =>
                       p.type === "text" ? (
                         <div key={i} className="prose prose-invert prose-sm max-w-none [&_p]:my-1">
@@ -71,9 +79,18 @@ export function AIChatWidget() {
               ))}
               {busy && (
                 <div className="flex gap-1 text-muted-foreground">
-                  <span className="h-2 w-2 animate-bounce rounded-full bg-current" style={{ animationDelay: "0ms" }} />
-                  <span className="h-2 w-2 animate-bounce rounded-full bg-current" style={{ animationDelay: "120ms" }} />
-                  <span className="h-2 w-2 animate-bounce rounded-full bg-current" style={{ animationDelay: "240ms" }} />
+                  <span
+                    className="h-2 w-2 animate-bounce rounded-full bg-current"
+                    style={{ animationDelay: "0ms" }}
+                  />
+                  <span
+                    className="h-2 w-2 animate-bounce rounded-full bg-current"
+                    style={{ animationDelay: "120ms" }}
+                  />
+                  <span
+                    className="h-2 w-2 animate-bounce rounded-full bg-current"
+                    style={{ animationDelay: "240ms" }}
+                  />
                 </div>
               )}
             </div>
@@ -85,7 +102,10 @@ export function AIChatWidget() {
                 placeholder="Ask me anything..."
                 className="flex-1 rounded-full border border-border bg-input px-3 py-2 text-sm outline-none focus:border-primary"
               />
-              <button disabled={busy} className="rounded-full bg-primary p-2 text-primary-foreground disabled:opacity-50">
+              <button
+                disabled={busy}
+                className="rounded-full bg-primary p-2 text-primary-foreground disabled:opacity-50"
+              >
                 <Send className="h-4 w-4" />
               </button>
             </form>

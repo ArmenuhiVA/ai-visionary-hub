@@ -5,14 +5,28 @@ import { useTalks } from "@/hooks/use-content";
 import { useLanguage } from "@/hooks/use-language";
 import { getLocalizedField } from "@/i18n";
 import { motion } from "framer-motion";
-import { Calendar, MapPin, Globe, Mic, Users, Headphones, MessageSquare, FileText, Newspaper } from "lucide-react";
+import {
+  Calendar,
+  MapPin,
+  Globe,
+  Mic,
+  Users,
+  Headphones,
+  MessageSquare,
+  FileText,
+  Newspaper,
+} from "lucide-react";
 import { AIChatWidget } from "@/components/shared/AIChatWidget";
 
 export const Route = createFileRoute("/talks")({
   head: () => ({
     meta: [
       { title: "Talks & Events — Dr. Varazdat Avetisyan" },
-      { name: "description", content: "Keynotes, workshops, panels, podcasts and interviews delivered across 15+ countries." },
+      {
+        name: "description",
+        content:
+          "Keynotes, workshops, panels, podcasts and interviews delivered across 15+ countries.",
+      },
       { property: "og:title", content: "Talks by Dr. Varazdat Avetisyan" },
       { property: "og:description", content: "International speaker on AI, ML, and education." },
     ],
@@ -26,7 +40,12 @@ const SECTIONS: { key: string; title: string; types: string[]; icon: typeof Mic 
   { key: "panels", title: "Panels", types: ["Panel Discussion"], icon: Users },
   { key: "podcasts", title: "Podcasts", types: ["Podcast"], icon: Headphones },
   { key: "interviews", title: "Interviews", types: ["Interview"], icon: MessageSquare },
-  { key: "articles", title: "Commentaries, Guest Posts, and Other Articles", types: ["Guest Article"], icon: FileText },
+  {
+    key: "articles",
+    title: "Commentaries, Guest Posts, and Other Articles",
+    types: ["Guest Article"],
+    icon: FileText,
+  },
   { key: "mentions", title: "Mentions", types: ["Media Mention"], icon: Newspaper },
 ];
 
@@ -85,10 +104,13 @@ function Talks() {
                       className="rounded-2xl border border-border bg-card p-5 transition hover:border-primary/40"
                     >
                       <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-muted-foreground">
-                        {t.country_flag && <span className="text-xl leading-none">{t.country_flag}</span>}
+                        {t.country_flag && (
+                          <span className="text-xl leading-none">{t.country_flag}</span>
+                        )}
                         {(t.city || t.country) && (
                           <span className="inline-flex items-center gap-1">
-                            <MapPin className="h-3 w-3" /> {[t.city, t.country].filter(Boolean).join(", ")}
+                            <MapPin className="h-3 w-3" />{" "}
+                            {[t.city, t.country].filter(Boolean).join(", ")}
                           </span>
                         )}
                         {t.event_date && (
@@ -102,15 +124,21 @@ function Talks() {
                           </span>
                         )}
                         {t.is_upcoming && (
-                          <span className="rounded-full bg-accent/10 px-2 py-0.5 text-accent">Upcoming</span>
+                          <span className="rounded-full bg-accent/10 px-2 py-0.5 text-accent">
+                            Upcoming
+                          </span>
                         )}
                       </div>
-                      <h3 className="mt-2 font-display text-lg font-semibold">{getLocalizedField(t, "title", lang)}</h3>
+                      <h3 className="mt-2 font-display text-lg font-semibold">
+                        {getLocalizedField(t, "title", lang)}
+                      </h3>
                       {t.organization && (
                         <p className="mt-1 text-sm text-muted-foreground">{t.organization}</p>
                       )}
                       {getLocalizedField(t, "description", lang) && (
-                        <p className="mt-2 text-sm text-muted-foreground/90">{getLocalizedField(t, "description", lang)}</p>
+                        <p className="mt-2 text-sm text-muted-foreground/90">
+                          {getLocalizedField(t, "description", lang)}
+                        </p>
                       )}
                     </motion.div>
                   ))}
@@ -119,9 +147,7 @@ function Talks() {
             );
           })}
 
-          {talks.length === 0 && (
-            <p className="text-muted-foreground">No entries yet.</p>
-          )}
+          {talks.length === 0 && <p className="text-muted-foreground">No entries yet.</p>}
         </div>
       </main>
       <SiteFooter />

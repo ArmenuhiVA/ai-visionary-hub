@@ -64,11 +64,7 @@ export function SiteHeader() {
           >
             {t("nav.admin")}
           </Link>
-          <button
-            className="md:hidden"
-            onClick={() => setOpen(!open)}
-            aria-label="Menu"
-          >
+          <button className="md:hidden" onClick={() => setOpen(!open)} aria-label="Menu">
             {open ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
           </button>
         </div>
@@ -86,7 +82,11 @@ export function SiteHeader() {
                 {l.label}
               </Link>
             ))}
-            <Link to="/admin" onClick={() => setOpen(false)} className="rounded-md px-3 py-2 text-sm hover:bg-muted">
+            <Link
+              to="/admin"
+              onClick={() => setOpen(false)}
+              className="rounded-md px-3 py-2 text-sm hover:bg-muted"
+            >
               {t("nav.admin")}
             </Link>
             <LanguageSwitcher className="mt-2 self-start" />

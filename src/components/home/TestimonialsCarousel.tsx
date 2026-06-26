@@ -23,7 +23,9 @@ export function TestimonialsCarousel() {
 
   return (
     <section className="mx-auto max-w-4xl px-4 py-24 text-center">
-      <div className="font-mono text-xs uppercase tracking-widest text-accent">{t("sections.testimonials")}</div>
+      <div className="font-mono text-xs uppercase tracking-widest text-accent">
+        {t("sections.testimonials")}
+      </div>
       <div className="relative mt-10 min-h-[180px]">
         <AnimatePresence mode="wait">
           <motion.blockquote
@@ -34,7 +36,9 @@ export function TestimonialsCarousel() {
             transition={{ duration: 0.5 }}
           >
             <Quote className="mx-auto h-8 w-8 text-primary" />
-            <p className="mt-6 font-display text-xl md:text-2xl">{getLocalizedField(cur, "text", lang)}</p>
+            <p className="mt-6 font-display text-xl md:text-2xl">
+              {getLocalizedField(cur, "text", lang)}
+            </p>
             <footer className="mt-6 text-sm text-muted-foreground">
               <span className="font-semibold text-foreground">{cur.name}</span>
               {cur.role ? ` · ${cur.role}` : ""}

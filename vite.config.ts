@@ -6,10 +6,10 @@ export default defineConfig({
     routers: {
       server: {
         entry: "server",
-      }
-    }
+      },
+    },
   },
   nitro: {
-    preset: "vercel"
-  }
+    preset: "vercel",
+  },
 });

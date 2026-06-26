@@ -16,9 +16,16 @@ export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       { title: "Dr. Varazdat Avetisyan — AI Educator, CTO & International Speaker" },
-      { name: "description", content: "Empowering the next generation of AI professionals. Courses, talks, and research from Yerevan, Armenia." },
+      {
+        name: "description",
+        content:
+          "Empowering the next generation of AI professionals. Courses, talks, and research from Yerevan, Armenia.",
+      },
       { property: "og:title", content: "Dr. Varazdat Avetisyan — AI Educator" },
-      { property: "og:description", content: "PhD in Computer Engineering. 5,000+ students trained. 100+ workshops." },
+      {
+        property: "og:description",
+        content: "PhD in Computer Engineering. 5,000+ students trained. 100+ workshops.",
+      },
     ],
   }),
   ssr: false,

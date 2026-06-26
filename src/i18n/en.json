@@ -14,7 +14,13 @@
     "cta_courses": "Explore Courses",
     "cta_cv": "Download CV",
     "scroll": "Scroll to explore",
-    "roles": ["AI Educator", "Data Scientist", "University Professor", "International Speaker", "CTO"]
+    "roles": [
+      "AI Educator",
+      "Data Scientist",
+      "University Professor",
+      "International Speaker",
+      "CTO"
+    ]
   },
   "sections": {
     "featured_courses": "Featured Courses",

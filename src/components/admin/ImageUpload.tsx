@@ -27,7 +27,9 @@ export function ImageUpload({
       return;
     }
     // Use long-lived signed URL since buckets are private (workspace policy)
-    const { data, error: signErr } = await supabase.storage.from(bucket).createSignedUrl(path, 60 * 60 * 24 * 365 * 10);
+    const { data, error: signErr } = await supabase.storage
+      .from(bucket)
+      .createSignedUrl(path, 60 * 60 * 24 * 365 * 10);
     if (signErr || !data) {
       toast.error(signErr?.message ?? "Could not generate URL");
       setBusy(false);
@@ -44,7 +46,11 @@ export function ImageUpload({
       <div className="flex items-center gap-3">
         {value && <img src={value} alt="" className="h-16 w-16 rounded-lg object-cover" />}
         <label className="cursor-pointer inline-flex items-center gap-2 rounded-lg border border-dashed border-border bg-input px-3 py-2 text-xs hover:border-primary">
-          {busy ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : <Upload className="h-3.5 w-3.5" />}
+          {busy ? (
+            <Loader2 className="h-3.5 w-3.5 animate-spin" />
+          ) : (
+            <Upload className="h-3.5 w-3.5" />
+          )}
           {value ? "Replace" : "Upload"}
           <input
             type="file"
@@ -54,7 +60,11 @@ export function ImageUpload({
           />
         </label>
         {value && (
-          <button type="button" onClick={() => onChange(null)} className="text-xs text-muted-foreground hover:text-destructive">
+          <button
+            type="button"
+            onClick={() => onChange(null)}
+            className="text-xs text-muted-foreground hover:text-destructive"
+          >
             Remove
           </button>
         )}

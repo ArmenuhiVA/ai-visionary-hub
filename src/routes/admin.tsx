@@ -2,7 +2,22 @@ import { createFileRoute, Link, Outlet, useNavigate, useRouterState } from "@tan
 import { useAuth } from "@/hooks/use-auth";
 import { useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
-import { LayoutDashboard, User, BookOpen, Mic, MessageSquare, LogOut, ExternalLink, Brain, Video, Settings, Users, Languages, Palette, Eye } from "lucide-react";
+import {
+  LayoutDashboard,
+  User,
+  BookOpen,
+  Mic,
+  MessageSquare,
+  LogOut,
+  ExternalLink,
+  Brain,
+  Video,
+  Settings,
+  Users,
+  Languages,
+  Palette,
+  Eye,
+} from "lucide-react";
 import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/admin")({
@@ -33,7 +48,11 @@ function AdminLayout() {
   }, [loading, user, navigate]);
 
   if (loading || !user) {
-    return <div className="flex min-h-screen items-center justify-center text-muted-foreground">Loading…</div>;
+    return (
+      <div className="flex min-h-screen items-center justify-center text-muted-foreground">
+        Loading…
+      </div>
+    );
   }
   if (!canAccessAdmin) {
     return (
@@ -41,7 +60,12 @@ function AdminLayout() {
         <div>
           <h1 className="font-display text-2xl">Not authorized</h1>
           <p className="mt-2 text-sm text-muted-foreground">This account is not an admin.</p>
-          <button onClick={() => supabase.auth.signOut().then(() => navigate({ to: "/auth" }))} className="mt-4 rounded-full bg-primary px-4 py-2 text-sm text-primary-foreground">Sign out</button>
+          <button
+            onClick={() => supabase.auth.signOut().then(() => navigate({ to: "/auth" }))}
+            className="mt-4 rounded-full bg-primary px-4 py-2 text-sm text-primary-foreground"
+          >
+            Sign out
+          </button>
         </div>
       </div>
     );
@@ -63,7 +87,9 @@ function AdminLayout() {
                 to={item.to}
                 className={cn(
                   "flex items-center gap-3 rounded-lg px-3 py-2 text-sm transition",
-                  active ? "border-l-2 border-primary bg-primary/10 text-foreground" : "text-muted-foreground hover:bg-muted hover:text-foreground",
+                  active
+                    ? "border-l-2 border-primary bg-primary/10 text-foreground"
+                    : "text-muted-foreground hover:bg-muted hover:text-foreground",
                 )}
               >
                 <item.icon className="h-4 w-4" />
@@ -81,7 +107,10 @@ function AdminLayout() {
           <div className="px-2 py-2 text-xs">
             <div className="truncate text-muted-foreground">{user.email}</div>
           </div>
-          <Link to="/" className="flex items-center gap-2 rounded-lg px-2 py-2 text-xs text-muted-foreground hover:bg-muted">
+          <Link
+            to="/"
+            className="flex items-center gap-2 rounded-lg px-2 py-2 text-xs text-muted-foreground hover:bg-muted"
+          >
             <ExternalLink className="h-3.5 w-3.5" /> View site
           </Link>
           <button

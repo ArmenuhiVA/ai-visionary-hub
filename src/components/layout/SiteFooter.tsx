@@ -33,21 +33,29 @@ export function SiteFooter() {
             <p className="mt-2 text-sm text-muted-foreground">{t("footer.tagline")}</p>
             <LanguageSwitcher className="mt-4" />
           </div>
-          <FooterCol title="Explore" links={[
-            { to: "/", label: t("nav.home") },
-            { to: "/about", label: t("nav.about") },
-            { to: "/courses", label: t("nav.courses") },
-            { to: "/videos", label: t("nav.videos") },
-          ]} />
-          <FooterCol title="More" links={[
-            { to: "/talks", label: t("nav.talks") },
-            { to: "/blog", label: t("nav.blog") },
-            { to: "/companies", label: t("nav.companies") },
-            { to: "/contact", label: t("sections.contact") },
-          ]} />
+          <FooterCol
+            title="Explore"
+            links={[
+              { to: "/", label: t("nav.home") },
+              { to: "/about", label: t("nav.about") },
+              { to: "/courses", label: t("nav.courses") },
+              { to: "/videos", label: t("nav.videos") },
+            ]}
+          />
+          <FooterCol
+            title="More"
+            links={[
+              { to: "/talks", label: t("nav.talks") },
+              { to: "/blog", label: t("nav.blog") },
+              { to: "/companies", label: t("nav.companies") },
+              { to: "/contact", label: t("sections.contact") },
+            ]}
+          />
           <div>
             <div className="font-display text-sm font-semibold">Stay updated</div>
-            <p className="mt-2 text-xs text-muted-foreground">New courses and talks, direct to your inbox.</p>
+            <p className="mt-2 text-xs text-muted-foreground">
+              New courses and talks, direct to your inbox.
+            </p>
             {done ? (
               <p className="mt-3 text-xs text-accent">✓ You're subscribed!</p>
             ) : (
@@ -87,7 +95,9 @@ function FooterCol({ title, links }: { title: string; links: { to: string; label
       <ul className="mt-3 space-y-2 text-sm text-muted-foreground">
         {links.map((l) => (
           <li key={l.to + l.label}>
-            <Link to={l.to} className="hover:text-foreground transition">{l.label}</Link>
+            <Link to={l.to} className="hover:text-foreground transition">
+              {l.label}
+            </Link>
           </li>
         ))}
       </ul>

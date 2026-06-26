@@ -27,7 +27,12 @@ export function LanguageSwitcher({ className }: { className?: string }) {
   }, []);
 
   return (
-    <div className={cn("inline-flex items-center gap-1 rounded-full border border-border bg-surface/60 p-1", className)}>
+    <div
+      className={cn(
+        "inline-flex items-center gap-1 rounded-full border border-border bg-surface/60 p-1",
+        className,
+      )}
+    >
       {langs.map((l) => (
         <button
           key={l.code}

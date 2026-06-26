@@ -16,7 +16,10 @@ function Dashboard() {
         supabase.from("courses").select("id", { count: "exact", head: true }),
         supabase.from("talks").select("id", { count: "exact", head: true }),
         supabase.from("contact_messages").select("id", { count: "exact", head: true }),
-        supabase.from("contact_messages").select("id", { count: "exact", head: true }).eq("is_read", false),
+        supabase
+          .from("contact_messages")
+          .select("id", { count: "exact", head: true })
+          .eq("is_read", false),
       ]);
       return {
         courses: c.count ?? 0,
@@ -30,7 +33,13 @@ function Dashboard() {
   const cards = [
     { label: "Courses", value: data?.courses ?? 0, icon: BookOpen, to: "/admin/courses" },
     { label: "Talks", value: data?.talks ?? 0, icon: Mic, to: "/admin/talks" },
-    { label: "Messages", value: data?.messages ?? 0, badge: data?.unread, icon: MessageSquare, to: "/admin/messages" },
+    {
+      label: "Messages",
+      value: data?.messages ?? 0,
+      badge: data?.unread,
+      icon: MessageSquare,
+      to: "/admin/messages",
+    },
     { label: "Profile", value: "Edit", icon: User, to: "/admin/profile" },
   ];
 
@@ -49,7 +58,9 @@ function Dashboard() {
             <div className="mt-3 font-display text-3xl font-bold">{c.value}</div>
             <div className="mt-1 text-xs text-muted-foreground">{c.label}</div>
             {c.badge !== undefined && c.badge > 0 && (
-              <span className="absolute right-3 top-3 rounded-full bg-primary px-2 py-0.5 text-xs text-primary-foreground">{c.badge}</span>
+              <span className="absolute right-3 top-3 rounded-full bg-primary px-2 py-0.5 text-xs text-primary-foreground">
+                {c.badge}
+              </span>
             )}
           </Link>
         ))}

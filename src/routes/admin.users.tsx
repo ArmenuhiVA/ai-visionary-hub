@@ -3,12 +3,7 @@ import { useEffect, useState } from "react";
 import { useServerFn } from "@tanstack/react-start";
 import { toast } from "sonner";
 import { Eye, EyeOff, Trash2, UserPlus } from "lucide-react";
-import {
-  listUsers,
-  createUser,
-  deleteUser,
-  updateUserRole,
-} from "@/lib/admin-users.functions";
+import { listUsers, createUser, deleteUser, updateUserRole } from "@/lib/admin-users.functions";
 
 export const Route = createFileRoute("/admin/users")({
   ssr: false,
@@ -151,13 +146,27 @@ function UsersPage() {
           </thead>
           <tbody>
             {loading && (
-              <tr><td colSpan={4} className="px-4 py-6 text-center text-muted-foreground">Loading…</td></tr>
+              <tr>
+                <td colSpan={4} className="px-4 py-6 text-center text-muted-foreground">
+                  Loading…
+                </td>
+              </tr>
             )}
             {!loading && rows.length === 0 && (
-              <tr><td colSpan={4} className="px-4 py-6 text-center text-muted-foreground">No users</td></tr>
+              <tr>
+                <td colSpan={4} className="px-4 py-6 text-center text-muted-foreground">
+                  No users
+                </td>
+              </tr>
             )}
             {rows.map((u) => {
-              const currentRole = (u.roles.includes("admin") ? "admin" : u.roles.includes("viewer") ? "viewer" : "viewer") as "admin" | "viewer";
+              const currentRole = (
+                u.roles.includes("admin")
+                  ? "admin"
+                  : u.roles.includes("viewer")
+                    ? "viewer"
+                    : "viewer"
+              ) as "admin" | "viewer";
               return (
                 <tr key={u.id} className="border-t border-border">
                   <td className="px-4 py-3">{u.email}</td>
@@ -171,9 +180,14 @@ function UsersPage() {
                       <option value="admin">Admin</option>
                     </select>
                   </td>
-                  <td className="px-4 py-3 text-muted-foreground">{new Date(u.created_at).toLocaleDateString()}</td>
+                  <td className="px-4 py-3 text-muted-foreground">
+                    {new Date(u.created_at).toLocaleDateString()}
+                  </td>
                   <td className="px-4 py-3 text-right">
-                    <button onClick={() => onDelete(u.id)} className="text-destructive hover:opacity-80">
+                    <button
+                      onClick={() => onDelete(u.id)}
+                      className="text-destructive hover:opacity-80"
+                    >
                       <Trash2 className="h-4 w-4" />
                     </button>
                   </td>

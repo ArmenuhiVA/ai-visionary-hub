@@ -13,7 +13,11 @@ export const Route = createFileRoute("/companies")({
   head: () => ({
     meta: [
       { title: "Companies & Partners — Dr. Varazdat Avetisyan" },
-      { name: "description", content: "Universities, training centers, and companies collaborating with Dr. Varazdat Avetisyan." },
+      {
+        name: "description",
+        content:
+          "Universities, training centers, and companies collaborating with Dr. Varazdat Avetisyan.",
+      },
       { property: "og:title", content: "Partners & Collaborations" },
       { property: "og:description", content: "Universities, academies, and companies." },
       { property: "og:url", content: "/companies" },
@@ -49,18 +53,19 @@ function Companies() {
     <div className="min-h-screen">
       <SiteHeader />
       <main className="mx-auto max-w-6xl px-4 pt-32 pb-20">
-        <div className="font-mono text-xs uppercase tracking-widest text-accent">Collaborations</div>
+        <div className="font-mono text-xs uppercase tracking-widest text-accent">
+          Collaborations
+        </div>
         <h1 className="mt-2 font-display text-4xl font-bold md:text-6xl">Companies & Partners</h1>
         <p className="mt-3 max-w-2xl text-muted-foreground">
-          Universities, academies, and organizations Dr. Varazdat collaborates with across teaching, research, and consulting.
+          Universities, academies, and organizations Dr. Varazdat collaborates with across teaching,
+          research, and consulting.
         </p>
 
         <div className="mt-16 space-y-16">
           {Object.entries(grouped).map(([type, items]) => (
             <section key={type}>
-              <h2 className="font-display text-2xl font-semibold">
-                {TYPE_LABELS[type] ?? type}
-              </h2>
+              <h2 className="font-display text-2xl font-semibold">{TYPE_LABELS[type] ?? type}</h2>
               <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
                 {items.map((p, i) => (
                   <motion.div

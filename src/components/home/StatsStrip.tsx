@@ -17,7 +17,10 @@ export function StatsStrip() {
     <section ref={ref} className="border-y border-border bg-secondary py-12">
       <div className="mx-auto grid max-w-7xl grid-cols-2 gap-6 px-4 md:grid-cols-3 lg:grid-cols-6">
         {stats.map((s, i) => {
-          const Icon = (Icons as unknown as Record<string, React.FC<{ className?: string }>>)[toPascal(s.icon ?? "Star")] ?? Icons.Star;
+          const Icon =
+            (Icons as unknown as Record<string, React.FC<{ className?: string }>>)[
+              toPascal(s.icon ?? "Star")
+            ] ?? Icons.Star;
           const numeric = parseInt(s.value, 10);
           const suffix = s.value.replace(/[0-9]/g, "");
           return (
@@ -30,10 +33,16 @@ export function StatsStrip() {
             >
               <Icon className="mx-auto h-6 w-6 text-accent" />
               <div className="mt-2 font-display text-3xl font-bold md:text-4xl">
-                {inView && !isNaN(numeric) ? <CountUp end={numeric} duration={2} /> : numeric || s.value}
+                {inView && !isNaN(numeric) ? (
+                  <CountUp end={numeric} duration={2} />
+                ) : (
+                  numeric || s.value
+                )}
                 {suffix}
               </div>
-              <div className="mt-1 text-xs text-muted-foreground">{getLocalizedField(s, "label", lang)}</div>
+              <div className="mt-1 text-xs text-muted-foreground">
+                {getLocalizedField(s, "label", lang)}
+              </div>
             </motion.div>
           );
         })}

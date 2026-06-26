@@ -16,7 +16,11 @@ export function useStats() {
   return useQuery({
     queryKey: ["stats"],
     queryFn: async () => {
-      const { data } = await supabase.from("stats").select("*").eq("is_visible", true).order("sort_order");
+      const { data } = await supabase
+        .from("stats")
+        .select("*")
+        .eq("is_visible", true)
+        .order("sort_order");
       return data ?? [];
     },
     staleTime: 5 * 60 * 1000,
@@ -40,7 +44,11 @@ export function usePartners() {
   return useQuery({
     queryKey: ["partners"],
     queryFn: async () => {
-      const { data } = await supabase.from("partners").select("*").eq("is_published", true).order("sort_order");
+      const { data } = await supabase
+        .from("partners")
+        .select("*")
+        .eq("is_published", true)
+        .order("sort_order");
       return data ?? [];
     },
     staleTime: 5 * 60 * 1000,
@@ -64,7 +72,11 @@ export function useTalks() {
   return useQuery({
     queryKey: ["talks"],
     queryFn: async () => {
-      const { data } = await supabase.from("talks").select("*").eq("is_published", true).order("event_date", { ascending: false });
+      const { data } = await supabase
+        .from("talks")
+        .select("*")
+        .eq("is_published", true)
+        .order("event_date", { ascending: false });
       return data ?? [];
     },
     staleTime: 5 * 60 * 1000,
