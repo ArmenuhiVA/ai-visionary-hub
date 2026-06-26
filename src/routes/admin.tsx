@@ -2,7 +2,7 @@ import { createFileRoute, Link, Outlet, useNavigate, useRouterState } from "@tan
 import { useAuth } from "@/hooks/use-auth";
 import { useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
-import { LayoutDashboard, User, BookOpen, Mic, MessageSquare, LogOut, ExternalLink, Brain, Video, Settings } from "lucide-react";
+import { LayoutDashboard, User, BookOpen, Mic, MessageSquare, LogOut, ExternalLink, Brain, Video, Settings, Users, Languages, Palette, Eye } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/admin")({
@@ -17,11 +17,14 @@ const NAV = [
   { to: "/admin/videos", label: "Videos", icon: Video },
   { to: "/admin/talks", label: "Talks", icon: Mic },
   { to: "/admin/messages", label: "Messages", icon: MessageSquare },
+  { to: "/admin/users", label: "Users", icon: Users, adminOnly: true },
+  { to: "/admin/languages", label: "Languages", icon: Languages, adminOnly: true },
+  { to: "/admin/colors", label: "Colors", icon: Palette, adminOnly: true },
   { to: "/admin/settings", label: "Settings", icon: Settings },
 ];
 
 function AdminLayout() {
-  const { user, isAdmin, loading } = useAuth();
+  const { user, isAdmin, canAccessAdmin, isReadOnly, loading } = useAuth();
   const navigate = useNavigate();
   const pathname = useRouterState({ select: (s) => s.location.pathname });
 
@@ -32,7 +35,7 @@ function AdminLayout() {
   if (loading || !user) {
     return <div className="flex min-h-screen items-center justify-center text-muted-foreground">Loading…</div>;
   }
-  if (!isAdmin) {
+  if (!canAccessAdmin) {
     return (
       <div className="flex min-h-screen items-center justify-center bg-background px-4 text-center">
         <div>
@@ -52,7 +55,7 @@ function AdminLayout() {
           <span className="font-display font-bold text-brand-gradient">Admin Panel</span>
         </div>
         <nav className="flex-1 space-y-1 px-3">
-          {NAV.map((item) => {
+          {NAV.filter((i) => !i.adminOnly || isAdmin).map((item) => {
             const active = item.exact ? pathname === item.to : pathname.startsWith(item.to);
             return (
               <Link
@@ -68,6 +71,11 @@ function AdminLayout() {
               </Link>
             );
           })}
+          {isReadOnly && (
+            <div className="mt-3 flex items-center gap-2 rounded-lg bg-amber-500/10 px-3 py-2 text-xs text-amber-400">
+              <Eye className="h-3.5 w-3.5" /> Read-only access
+            </div>
+          )}
         </nav>
         <div className="border-t border-border p-3">
           <div className="px-2 py-2 text-xs">

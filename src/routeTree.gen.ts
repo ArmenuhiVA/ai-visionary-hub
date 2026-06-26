@@ -23,11 +23,14 @@ import { Route as AdminIndexRouteImport } from './routes/admin.index'
 import { Route as CoursesSlugRouteImport } from './routes/courses.$slug'
 import { Route as ApiChatRouteImport } from './routes/api/chat'
 import { Route as AdminVideosRouteImport } from './routes/admin.videos'
+import { Route as AdminUsersRouteImport } from './routes/admin.users'
 import { Route as AdminTalksRouteImport } from './routes/admin.talks'
 import { Route as AdminSettingsRouteImport } from './routes/admin.settings'
 import { Route as AdminProfileRouteImport } from './routes/admin.profile'
 import { Route as AdminMessagesRouteImport } from './routes/admin.messages'
+import { Route as AdminLanguagesRouteImport } from './routes/admin.languages'
 import { Route as AdminCoursesRouteImport } from './routes/admin.courses'
+import { Route as AdminColorsRouteImport } from './routes/admin.colors'
 
 const VideosRoute = VideosRouteImport.update({
   id: '/videos',
@@ -99,6 +102,11 @@ const AdminVideosRoute = AdminVideosRouteImport.update({
   path: '/videos',
   getParentRoute: () => AdminRoute,
 } as any)
+const AdminUsersRoute = AdminUsersRouteImport.update({
+  id: '/users',
+  path: '/users',
+  getParentRoute: () => AdminRoute,
+} as any)
 const AdminTalksRoute = AdminTalksRouteImport.update({
   id: '/talks',
   path: '/talks',
@@ -119,9 +127,19 @@ const AdminMessagesRoute = AdminMessagesRouteImport.update({
   path: '/messages',
   getParentRoute: () => AdminRoute,
 } as any)
+const AdminLanguagesRoute = AdminLanguagesRouteImport.update({
+  id: '/languages',
+  path: '/languages',
+  getParentRoute: () => AdminRoute,
+} as any)
 const AdminCoursesRoute = AdminCoursesRouteImport.update({
   id: '/courses',
   path: '/courses',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminColorsRoute = AdminColorsRouteImport.update({
+  id: '/colors',
+  path: '/colors',
   getParentRoute: () => AdminRoute,
 } as any)
 
@@ -135,11 +153,14 @@ export interface FileRoutesByFullPath {
   '/contact': typeof ContactRoute
   '/talks': typeof TalksRoute
   '/videos': typeof VideosRoute
+  '/admin/colors': typeof AdminColorsRoute
   '/admin/courses': typeof AdminCoursesRoute
+  '/admin/languages': typeof AdminLanguagesRoute
   '/admin/messages': typeof AdminMessagesRoute
   '/admin/profile': typeof AdminProfileRoute
   '/admin/settings': typeof AdminSettingsRoute
   '/admin/talks': typeof AdminTalksRoute
+  '/admin/users': typeof AdminUsersRoute
   '/admin/videos': typeof AdminVideosRoute
   '/api/chat': typeof ApiChatRoute
   '/courses/$slug': typeof CoursesSlugRoute
@@ -155,11 +176,14 @@ export interface FileRoutesByTo {
   '/contact': typeof ContactRoute
   '/talks': typeof TalksRoute
   '/videos': typeof VideosRoute
+  '/admin/colors': typeof AdminColorsRoute
   '/admin/courses': typeof AdminCoursesRoute
+  '/admin/languages': typeof AdminLanguagesRoute
   '/admin/messages': typeof AdminMessagesRoute
   '/admin/profile': typeof AdminProfileRoute
   '/admin/settings': typeof AdminSettingsRoute
   '/admin/talks': typeof AdminTalksRoute
+  '/admin/users': typeof AdminUsersRoute
   '/admin/videos': typeof AdminVideosRoute
   '/api/chat': typeof ApiChatRoute
   '/courses/$slug': typeof CoursesSlugRoute
@@ -177,11 +201,14 @@ export interface FileRoutesById {
   '/contact': typeof ContactRoute
   '/talks': typeof TalksRoute
   '/videos': typeof VideosRoute
+  '/admin/colors': typeof AdminColorsRoute
   '/admin/courses': typeof AdminCoursesRoute
+  '/admin/languages': typeof AdminLanguagesRoute
   '/admin/messages': typeof AdminMessagesRoute
   '/admin/profile': typeof AdminProfileRoute
   '/admin/settings': typeof AdminSettingsRoute
   '/admin/talks': typeof AdminTalksRoute
+  '/admin/users': typeof AdminUsersRoute
   '/admin/videos': typeof AdminVideosRoute
   '/api/chat': typeof ApiChatRoute
   '/courses/$slug': typeof CoursesSlugRoute
@@ -200,11 +227,14 @@ export interface FileRouteTypes {
     | '/contact'
     | '/talks'
     | '/videos'
+    | '/admin/colors'
     | '/admin/courses'
+    | '/admin/languages'
     | '/admin/messages'
     | '/admin/profile'
     | '/admin/settings'
     | '/admin/talks'
+    | '/admin/users'
     | '/admin/videos'
     | '/api/chat'
     | '/courses/$slug'
@@ -220,11 +250,14 @@ export interface FileRouteTypes {
     | '/contact'
     | '/talks'
     | '/videos'
+    | '/admin/colors'
     | '/admin/courses'
+    | '/admin/languages'
     | '/admin/messages'
     | '/admin/profile'
     | '/admin/settings'
     | '/admin/talks'
+    | '/admin/users'
     | '/admin/videos'
     | '/api/chat'
     | '/courses/$slug'
@@ -241,11 +274,14 @@ export interface FileRouteTypes {
     | '/contact'
     | '/talks'
     | '/videos'
+    | '/admin/colors'
     | '/admin/courses'
+    | '/admin/languages'
     | '/admin/messages'
     | '/admin/profile'
     | '/admin/settings'
     | '/admin/talks'
+    | '/admin/users'
     | '/admin/videos'
     | '/api/chat'
     | '/courses/$slug'
@@ -368,6 +404,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminVideosRouteImport
       parentRoute: typeof AdminRoute
     }
+    '/admin/users': {
+      id: '/admin/users'
+      path: '/users'
+      fullPath: '/admin/users'
+      preLoaderRoute: typeof AdminUsersRouteImport
+      parentRoute: typeof AdminRoute
+    }
     '/admin/talks': {
       id: '/admin/talks'
       path: '/talks'
@@ -396,6 +439,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminMessagesRouteImport
       parentRoute: typeof AdminRoute
     }
+    '/admin/languages': {
+      id: '/admin/languages'
+      path: '/languages'
+      fullPath: '/admin/languages'
+      preLoaderRoute: typeof AdminLanguagesRouteImport
+      parentRoute: typeof AdminRoute
+    }
     '/admin/courses': {
       id: '/admin/courses'
       path: '/courses'
@@ -403,25 +453,38 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminCoursesRouteImport
       parentRoute: typeof AdminRoute
     }
+    '/admin/colors': {
+      id: '/admin/colors'
+      path: '/colors'
+      fullPath: '/admin/colors'
+      preLoaderRoute: typeof AdminColorsRouteImport
+      parentRoute: typeof AdminRoute
+    }
   }
 }
 
 interface AdminRouteChildren {
+  AdminColorsRoute: typeof AdminColorsRoute
   AdminCoursesRoute: typeof AdminCoursesRoute
+  AdminLanguagesRoute: typeof AdminLanguagesRoute
   AdminMessagesRoute: typeof AdminMessagesRoute
   AdminProfileRoute: typeof AdminProfileRoute
   AdminSettingsRoute: typeof AdminSettingsRoute
   AdminTalksRoute: typeof AdminTalksRoute
+  AdminUsersRoute: typeof AdminUsersRoute
   AdminVideosRoute: typeof AdminVideosRoute
   AdminIndexRoute: typeof AdminIndexRoute
 }
 
 const AdminRouteChildren: AdminRouteChildren = {
+  AdminColorsRoute: AdminColorsRoute,
   AdminCoursesRoute: AdminCoursesRoute,
+  AdminLanguagesRoute: AdminLanguagesRoute,
   AdminMessagesRoute: AdminMessagesRoute,
   AdminProfileRoute: AdminProfileRoute,
   AdminSettingsRoute: AdminSettingsRoute,
   AdminTalksRoute: AdminTalksRoute,
+  AdminUsersRoute: AdminUsersRoute,
   AdminVideosRoute: AdminVideosRoute,
   AdminIndexRoute: AdminIndexRoute,
 }
