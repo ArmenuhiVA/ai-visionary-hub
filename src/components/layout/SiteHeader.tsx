@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import { useEffect, useState } from "react";
 import { LanguageSwitcher } from "@/components/shared/LanguageSwitcher";
 import { ColorPicker } from "@/components/shared/ColorPicker";
+import { ThemeToggle } from "@/components/shared/ThemeToggle";
 import { cn } from "@/lib/utils";
 import { Menu, X } from "lucide-react";
 
@@ -55,6 +56,7 @@ export function SiteHeader() {
         </nav>
         <div className="flex items-center gap-2">
           <LanguageSwitcher className="hidden sm:inline-flex" />
+          <ThemeToggle />
           <ColorPicker />
           <Link
             to="/admin"

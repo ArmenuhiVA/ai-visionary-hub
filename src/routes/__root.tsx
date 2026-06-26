@@ -88,9 +88,37 @@ function RootComponent() {
   const { queryClient } = Route.useRouteContext();
   const [mounted, setMounted] = useState(false);
   useEffect(() => setMounted(true), []);
+
+  const personSchema = {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    name: "Dr. Varazdat Avetisyan",
+    jobTitle: "AI Educator, CTO & International Speaker",
+    description: "PhD in Technical Sciences. AI educator, data scientist, CTO, and international speaker from Yerevan, Armenia.",
+    url: "https://ai-visionary-hub.vercel.app",
+    sameAs: [
+      "https://www.linkedin.com/in/varazdat-avetisyan-phd-66346650/",
+      "https://www.youtube.com/@varazdatavetisyan3780",
+    ],
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: "Yerevan",
+      addressCountry: "AM",
+    },
+    knowsAbout: ["Artificial Intelligence", "Machine Learning", "Deep Learning", "Data Science", "Python", "LLMs"],
+  };
+
   return (
     <QueryClientProvider client={queryClient}>
-      {mounted ? <Outlet /> : null}
+      {mounted ? (
+        <>
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }}
+          />
+          <Outlet />
+        </>
+      ) : null}
       <Toaster theme="dark" position="bottom-right" />
     </QueryClientProvider>
   );

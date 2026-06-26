@@ -4,8 +4,11 @@ import { SiteFooter } from "@/components/layout/SiteFooter";
 import { NeuralHero } from "@/components/home/NeuralHero";
 import { StatsStrip } from "@/components/home/StatsStrip";
 import { FeaturedCourses } from "@/components/home/FeaturedCourses";
+import { LearningPathQuiz } from "@/components/home/LearningPathQuiz";
+import { TalksWorldMap } from "@/components/home/TalksWorldMap";
 import { PartnersMarquee } from "@/components/home/PartnersMarquee";
 import { TestimonialsCarousel } from "@/components/home/TestimonialsCarousel";
+import { NewsletterSignup } from "@/components/home/NewsletterSignup";
 import { ContactSection } from "@/components/home/ContactSection";
 import { AIChatWidget } from "@/components/shared/AIChatWidget";
 
@@ -30,8 +33,11 @@ function Home() {
         <NeuralHero />
         <StatsStrip />
         <FeaturedCourses />
+        <LearningPathQuiz />
+        <TalksWorldMap />
         <PartnersMarquee />
         <TestimonialsCarousel />
+        <NewsletterSignup />
         <ContactSection />
       </main>
       <SiteFooter />
