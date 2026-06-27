@@ -14,10 +14,7 @@ export const Route = createFileRoute("/blog")({
       { title: "Blog — Dr. Varazdat Avetisyan" },
       { name: "description", content: "Articles on AI, education, and the future of learning." },
       { property: "og:title", content: "Blog by Dr. Varazdat Avetisyan" },
-      {
-        property: "og:description",
-        content: "Essays on AI education, LLMs, and building with AI.",
-      },
+      { property: "og:description", content: "Essays on AI education, LLMs, and building with AI." },
     ],
   }),
   ssr: false,
@@ -41,26 +38,18 @@ function Blog() {
               transition={{ delay: i * 0.06 }}
             >
               <Link
-                to="/blog/$slug"
+                to="/blog_/$slug"
                 params={{ slug: p.slug }}
                 className="group block h-full rounded-2xl border border-border bg-card p-6 transition hover:border-primary/50"
               >
                 {p.cover_image_url && (
                   <div className="mb-4 overflow-hidden rounded-xl border border-border">
-                    <img
-                      src={p.cover_image_url}
-                      alt={getLocalizedField(p, "title", lang)}
-                      className="aspect-[16/9] w-full object-cover transition group-hover:scale-105"
-                    />
+                    <img src={p.cover_image_url} alt={getLocalizedField(p, "title", lang)} className="aspect-[16/9] w-full object-cover transition group-hover:scale-105" />
                   </div>
                 )}
                 {p.category && <span className="text-xs text-accent">{p.category}</span>}
-                <h2 className="mt-2 font-display text-xl font-semibold group-hover:text-accent transition">
-                  {getLocalizedField(p, "title", lang)}
-                </h2>
-                <p className="mt-2 text-sm text-muted-foreground line-clamp-3">
-                  {getLocalizedField(p, "excerpt", lang)}
-                </p>
+                <h2 className="mt-2 font-display text-xl font-semibold group-hover:text-accent transition">{getLocalizedField(p, "title", lang)}</h2>
+                <p className="mt-2 text-sm text-muted-foreground line-clamp-3">{getLocalizedField(p, "excerpt", lang)}</p>
                 <div className="mt-4 flex items-center justify-between">
                   <p className="text-xs text-muted-foreground">{p.published_at?.slice(0, 10)}</p>
                   <span className="inline-flex items-center gap-1 text-xs text-accent opacity-0 group-hover:opacity-100 transition">
