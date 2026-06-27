@@ -79,9 +79,8 @@ export function SiteFooter() {
             )}
           </div>
         </div>
-        <div className="mt-10 flex flex-col items-center justify-between gap-2 border-t border-border pt-6 text-xs text-muted-foreground md:flex-row">
+        <div className="mt-10 border-t border-border pt-6 text-center text-xs text-muted-foreground">
           <p>© {new Date().getFullYear()} Dr. Varazdat Avetisyan</p>
-          <p>{t("footer.made")} 🇦🇲</p>
         </div>
       </div>
     </footer>

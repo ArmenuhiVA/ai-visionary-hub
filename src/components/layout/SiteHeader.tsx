@@ -2,7 +2,6 @@ import { Link } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
 import { useEffect, useState } from "react";
 import { LanguageSwitcher } from "@/components/shared/LanguageSwitcher";
-import { ColorPicker } from "@/components/shared/ColorPicker";
 import { ThemeToggle } from "@/components/shared/ThemeToggle";
 import { cn } from "@/lib/utils";
 import { Menu, X } from "lucide-react";
@@ -57,7 +56,6 @@ export function SiteHeader() {
         <div className="flex items-center gap-2">
           <LanguageSwitcher className="hidden sm:inline-flex" />
           <ThemeToggle />
-          <ColorPicker />
           <Link
             to="/admin"
             className="hidden rounded-full px-3 py-1.5 text-xs text-muted-foreground hover:text-foreground md:inline-block"

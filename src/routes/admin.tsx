@@ -15,7 +15,7 @@ import {
   Settings,
   Users,
   Languages,
-  Palette,
+  ListChecks,
   Eye,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -34,7 +34,7 @@ const NAV = [
   { to: "/admin/messages", label: "Messages", icon: MessageSquare },
   { to: "/admin/users", label: "Users", icon: Users, adminOnly: true },
   { to: "/admin/languages", label: "Languages", icon: Languages, adminOnly: true },
-  { to: "/admin/colors", label: "Colors", icon: Palette, adminOnly: true },
+  { to: "/admin/colors", label: "Quiz Questions", icon: ListChecks, adminOnly: true },
   { to: "/admin/settings", label: "Settings", icon: Settings },
 ];
 

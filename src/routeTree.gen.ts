@@ -21,7 +21,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as CoursesIndexRouteImport } from './routes/courses.index'
 import { Route as AdminIndexRouteImport } from './routes/admin.index'
 import { Route as CoursesSlugRouteImport } from './routes/courses.$slug'
-import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
+import { Route as BlogSlugRouteImport } from './routes/blog_.$slug'
 import { Route as ApiChatRouteImport } from './routes/api/chat'
 import { Route as AdminVideosRouteImport } from './routes/admin.videos'
 import { Route as AdminUsersRouteImport } from './routes/admin.users'
@@ -94,9 +94,9 @@ const CoursesSlugRoute = CoursesSlugRouteImport.update({
   getParentRoute: () => rootRouteImport,
 } as any)
 const BlogSlugRoute = BlogSlugRouteImport.update({
-  id: '/$slug',
-  path: '/$slug',
-  getParentRoute: () => BlogRoute,
+  id: '/blog_/$slug',
+  path: '/blog/$slug',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const ApiChatRoute = ApiChatRouteImport.update({
   id: '/api/chat',
@@ -154,7 +154,7 @@ export interface FileRoutesByFullPath {
   '/about': typeof AboutRoute
   '/admin': typeof AdminRouteWithChildren
   '/auth': typeof AuthRoute
-  '/blog': typeof BlogRouteWithChildren
+  '/blog': typeof BlogRoute
   '/companies': typeof CompaniesRoute
   '/contact': typeof ContactRoute
   '/talks': typeof TalksRoute
@@ -178,7 +178,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/auth': typeof AuthRoute
-  '/blog': typeof BlogRouteWithChildren
+  '/blog': typeof BlogRoute
   '/companies': typeof CompaniesRoute
   '/contact': typeof ContactRoute
   '/talks': typeof TalksRoute
@@ -204,7 +204,7 @@ export interface FileRoutesById {
   '/about': typeof AboutRoute
   '/admin': typeof AdminRouteWithChildren
   '/auth': typeof AuthRoute
-  '/blog': typeof BlogRouteWithChildren
+  '/blog': typeof BlogRoute
   '/companies': typeof CompaniesRoute
   '/contact': typeof ContactRoute
   '/talks': typeof TalksRoute
@@ -219,7 +219,7 @@ export interface FileRoutesById {
   '/admin/users': typeof AdminUsersRoute
   '/admin/videos': typeof AdminVideosRoute
   '/api/chat': typeof ApiChatRoute
-  '/blog/$slug': typeof BlogSlugRoute
+  '/blog_/$slug': typeof BlogSlugRoute
   '/courses/$slug': typeof CoursesSlugRoute
   '/admin/': typeof AdminIndexRoute
   '/courses/': typeof CoursesIndexRoute
@@ -295,7 +295,7 @@ export interface FileRouteTypes {
     | '/admin/users'
     | '/admin/videos'
     | '/api/chat'
-    | '/blog/$slug'
+    | '/blog_/$slug'
     | '/courses/$slug'
     | '/admin/'
     | '/courses/'
@@ -306,12 +306,13 @@ export interface RootRouteChildren {
   AboutRoute: typeof AboutRoute
   AdminRoute: typeof AdminRouteWithChildren
   AuthRoute: typeof AuthRoute
-  BlogRoute: typeof BlogRouteWithChildren
+  BlogRoute: typeof BlogRoute
   CompaniesRoute: typeof CompaniesRoute
   ContactRoute: typeof ContactRoute
   TalksRoute: typeof TalksRoute
   VideosRoute: typeof VideosRoute
   ApiChatRoute: typeof ApiChatRoute
+  BlogSlugRoute: typeof BlogSlugRoute
   CoursesSlugRoute: typeof CoursesSlugRoute
   CoursesIndexRoute: typeof CoursesIndexRoute
 }
@@ -402,12 +403,12 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CoursesSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/blog/$slug': {
-      id: '/blog/$slug'
-      path: '/$slug'
+    '/blog_/$slug': {
+      id: '/blog_/$slug'
+      path: '/blog/$slug'
       fullPath: '/blog/$slug'
       preLoaderRoute: typeof BlogSlugRouteImport
-      parentRoute: typeof BlogRoute
+      parentRoute: typeof rootRouteImport
     }
     '/api/chat': {
       id: '/api/chat'
@@ -510,27 +511,18 @@ const AdminRouteChildren: AdminRouteChildren = {
 
 const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)
 
-interface BlogRouteChildren {
-  BlogSlugRoute: typeof BlogSlugRoute
-}
-
-const BlogRouteChildren: BlogRouteChildren = {
-  BlogSlugRoute: BlogSlugRoute,
-}
-
-const BlogRouteWithChildren = BlogRoute._addFileChildren(BlogRouteChildren)
-
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
   AdminRoute: AdminRouteWithChildren,
   AuthRoute: AuthRoute,
-  BlogRoute: BlogRouteWithChildren,
+  BlogRoute: BlogRoute,
   CompaniesRoute: CompaniesRoute,
   ContactRoute: ContactRoute,
   TalksRoute: TalksRoute,
   VideosRoute: VideosRoute,
   ApiChatRoute: ApiChatRoute,
+  BlogSlugRoute: BlogSlugRoute,
   CoursesSlugRoute: CoursesSlugRoute,
   CoursesIndexRoute: CoursesIndexRoute,
 }
